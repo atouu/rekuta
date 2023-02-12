@@ -1,137 +1,22 @@
 [
     {
-        "hiragana": "ああいいううえ",
-        "romaji": "a_a_i_i_u_u_e"
+	"hiragana": "_ああいあうえあ",
+        "romaji": "_a-a-i-a-u-e-a"
     },
     {
-        "hiragana": "いんえんおあお",
-        "romaji": "i_n_e_n_o_a_o"
+        "hiragana": "_あかさたがざだ",
+        "romaji": "_a-ka-sa-ta-ga-za-da"
     },
     {
-        "hiragana": "うおえいえうん",
-        "romaji": "u_o_e_i_e_u_n"
+	"hiragana": "_あきゃしゃちゃぎゃじゃてゃ",
+	"romaji": "_a-kya-sha-cha-gya-ja-tya"
     },
     {
-        "hiragana": "ええおおんんい",
-        "romaji": "e_e_o_o_n_n_i"
-	},
-	{
-		"hiragana": "おいあえあんあ"
-		"romaji": "o_i_a_e_a_n_a"
-	},
-	{
-		"hiragana": "んうあういおう"
-		"romaji": "n_u_a_u_i_o_u"
-	},
-	{
-		"hiragana": "ばびぶべぼんば"
-		"romaji": "ba_bi_bu_be_bo_m_ba"
-	},
-	{
-		"hiragana": "びゃびびゅびぇびょんびゃ"
-		"romaji": "bya_bi_byu_bye_byo_m_bya"
-	},	
-	{	
-		"hiragana": "ちゃちちゅちぇちょんちゃ"
-		"romaji": "cha_chi_chu_che_cho_n_cha"
-	},
-	{
-		"hiragana": "つぁつぃつつぇつぉんつぁ"
-		"romaji": "tsa_tsi_tsu_tse_tso_n_tsa"
-	},
-	{
-		"hiragana": "だぢづでどんだ"
-		"romaji": "da_di_du_de_do_n_da"
-	},
-	{
-		"hiragana": "ふぁふぃふふぇふぉんふぁ"
-		"romaji": "fa_fi_fu_fe_fi_ng_fa"
-	},
-	{
-		"hiragana": "がぎぐげごんが"
-		"romaji": "ga_gi_gu_ge_go_ng_ga"
-	},
-	{
-		"hiragana": "ぎゃぎぎゅぎぇぎょんぎゃ"
-		"romaji": "gya_gi_gyu_gye_gio_ng_gya"
-	},
-	{
-		"hiragana": "はひふへほんは"
-		"romaji": "ha_hi_hu_he_ho_ng_ha"
-	},
-	{
-		"hiragana": "ひゃひひゅひぇひょんひゃ"
-		"romaji": "hya_hi_hyu_hye_hyo_ng_hya"
-	},
-	{
-		"hiragana": "じゃじじゅじぇじょんじゃ"
-		"romaji": "ja_ji_ju_je_jo_n_ja"
-	},
-	{
-		"hiragana": "づぁづぃづづぇづぉんづぁ"
-		"romaji": "dza_dzi_dzu_dze_dzo_n_dza"
-	},
-	{
-		"hiragana": "かきくけこんか"
-		"romaji": "ka_ki_ku_ke_ko_ng_ka"
-	},
-	{
-		"hiragana": "ゃききゅきぇきょんきゃ"
-		"romaji": "kya_ki_kyu_kye_kyo_ng_kya"
-	},
-	{
-		"hiragana": "まみむめもんま"
-		"romaji": "ma_mi_mu_me_mo_n_ma"
-	},
-	{
-		"hiragana": "みゃみみゅみぇみょんみゃ"
-		"romaji": "mya_mi_myu_mye_myo_n_mya"
-	},
-	{
-		"hiragana": "なにぬねのんな"
-		"romaji": "na_ni_nu_ne_no_n_na"
-	},
-	{
-		"hiragana": "にゃににゅにぇにょんにゃ"
-		"romaji": "nya_ni_nyu_nye_nyo_n_nya"
-	},
-	{
-		"hiragana": "ぱぴぷぺぽんぱ"
-		"romaji": "pa_pi_pu_pe_po_n_pa"
-	},
-	{
-		"hiragana": "ぴゃぴぴゅぴぇぴょんぴゃ"
-		"romaji": "pya_pi_pyu_pye_pyo_n_pya"
-	},
-	{
-		"hiragana": "らりるれろんら"
-		"romaji": "ra_ri_ru_re_ro_n_ra"
-	},
-	{
-		"hiragana": "りゃりりゅりぇりょんりゃ"
-		"romaji": "rya_ri_ryu_rye_ryo_n_rya"
-	},
-	{
-		"hiragana": "さしすせそんさ"
-		"romaji": "sa_si_su_se_so_n_sa"
-	},
-	{
-		"hiragana": "しゃししゅしぇしょんしゃ"
-		"romaji": "sha_shi_shu_she_sho_n_sha"
-	},
-	{
-		"hiragana": "たちつてとんた"
-		"romaji": "ta_ti_tu_te_to_n_ta"
-	},
-	{
-		"hiragana": "わうぃううぇをんわ"
-		"romaji": "wa_wi_wu_we_wo_ng_wa"
-	},
-	{
-		"hiragana": "やいゆいぇよんや"
-		"romaji": "ya_yi_yu_ye_yo_ng_ya"
-	},
-	{
-		"hiragana": "ざじずぜぞんざ"
-		"romaji": "za_zi_zu_ze_zo_n_za"
+	"hiragana": "_あなはまばぱら",
+	"romaji": "_a-na-ha-ma-ba-pa-ra"
+    },
+    {
+        "hiragana": "_あにゃひゃみゃびゃぴゃりゃ",
+	"romaji": ""
+    }
 ]
