@@ -1,12 +1,10 @@
 package com.rekuta.mashi;
 
-import android.Manifest;
 import android.animation.*;
 import android.app.*;
 import android.app.Activity;
 import android.content.*;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.*;
 import android.graphics.*;
 import android.graphics.drawable.*;
@@ -28,7 +26,6 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -44,7 +41,6 @@ import java.util.TimerTask;
 import java.util.regex.*;
 import omrecorder.*;
 import org.json.*;
-import java.io.File;
 
 public class MainActivity extends Activity {
 	
@@ -223,12 +219,12 @@ public class MainActivity extends Activity {
 					playsamp.start();
 					_enableAll(false);
 					playsamp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-						
-						    @Override
-						    public void onCompletion(MediaPlayer mp) {
+					    @Override
+					    public void onCompletion(MediaPlayer mp) {
 							_enableAll(true);
 							AppUtil.showMessage(getApplicationContext(), "Done!");
-							  }});
+					    }
+                    });
 				}
 				else {
 					AppUtil.showMessage(getApplicationContext(), "No recorded sample yet.");
@@ -258,12 +254,7 @@ public class MainActivity extends Activity {
 							AppUtil.showMessage(getApplicationContext(), "Deleted");
 						}
 					});
-					delSampDlg.setNegativeButton("No", new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface _dialog, int _which) {
-							
-						}
-					});
+					delSampDlg.setNegativeButton("No", null);
 					delSampDlg.create().show();
 				}
 				else {
@@ -368,8 +359,8 @@ public class MainActivity extends Activity {
 		LayoutInflater inflater = getLayoutInflater();
 		View convertView = (View) inflater.inflate(R.layout.settings, null);
 		
-		final Switch switch1 = (Switch) convertView.findViewById(R.id.switch1);//on custome_dialog
-		final Switch switch2 = (Switch) convertView.findViewById(R.id.switch2);//on custome_dialog
+		final Switch switch1 = (Switch) convertView.findViewById(R.id.switch1);
+		final Switch switch2 = (Switch) convertView.findViewById(R.id.switch2);
 		final Switch switch3 = (Switch) convertView.findViewById(R.id.switch3);
 		
 		switch(audioEffect) {
@@ -395,9 +386,7 @@ public class MainActivity extends Activity {
 			}
 		}
 		
-		if (saveAs.equals("hiragana")) {
-				switch3.setChecked(true);
-		}
+		if (saveAs.equals("hiragana")) switch3.setChecked(true);
 		
 		settingsDialog.setView(convertView);
 		
@@ -426,6 +415,7 @@ public class MainActivity extends Activity {
 						break;
 					}
 				}
+                
 				if (switch3.isChecked()) {
 					settings.edit().putString("saveAs", "hiragana").commit();
 					saveAs = "hiragana";
@@ -434,17 +424,11 @@ public class MainActivity extends Activity {
 					settings.edit().putString("saveAs", "romaji").commit();
 					saveAs = "romaji";
 				}
-				if (listview1.getAdapter() != null) {
-					((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-				}
+                
+				if (listview1.getAdapter() != null) ((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 			}
 		});
-		settingsDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface _dialog, int _which) {
-				
-			}
-		});
+		settingsDialog.setNegativeButton("Cancel", null);
 		settingsDialog.create().show();
 	}
 	
@@ -453,12 +437,7 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder aboutDialog = new AlertDialog.Builder(MainActivity.this);
 		aboutDialog.setTitle("About");
 		aboutDialog.setMessage("Rekuta - Record Your Own UTAU\n\nMade by Mashi\n\nCredits:\nOremo (BGM)\n\nOpen Source Library:\nOMRecorder (Apache-2.0 license)");
-		aboutDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface _dialog, int _which) {
-				
-			}
-		});
+		aboutDialog.setPositiveButton("Okay", null);
 		aboutDialog.create().show();
 	}
 	

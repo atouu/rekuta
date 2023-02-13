@@ -17,8 +17,6 @@ import android.view.animation.*;
 import android.webkit.*;
 import android.widget.*;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class SetupActivity extends Activity {
 	   
@@ -57,11 +55,11 @@ public class SetupActivity extends Activity {
 	public void _checkPermissions() {
 		if (Build.VERSION.SDK_INT >= 23) {
 			if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_GRANTED
-						&& checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_GRANTED
-						&& checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-				main.setClass(getApplicationContext(), MainActivity.class);
-				startActivity(main);
-				finish();
+				&& checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_GRANTED
+				&& checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+				    main.setClass(getApplicationContext(), MainActivity.class);
+				    startActivity(main);
+				    finish();
 			}
 		}
 		else {
