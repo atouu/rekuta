@@ -56,7 +56,6 @@ public class MainActivity extends Activity {
 	
 	private ArrayList<String> reclist = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> samp = new ArrayList<>();
-	private ArrayList<String> ctmReclist = new ArrayList<>();
 	      
 	private EditText edittext1;
 	private Button set;
@@ -107,27 +106,17 @@ public class MainActivity extends Activity {
 			public void onClick(View _view) {
 				if (edittext1.getText().toString().equals("")) {
 					AppUtil.showMessage(getApplicationContext(), "Please enter voicebank folder.");
+					return;
 				}
-				else {
-					currentReclist = reclist.get((int)(spinner1.getSelectedItemPosition()));
-					filePath = FileUtil.getExternalStorageDir().concat("/Rekuta/".concat(edittext1.getText().toString().concat(" ".concat(currentReclist))));
-					if (true) {
-						FileUtil.makeDir(filePath);
-						FileUtil.writeFile(filePath.concat("/.nomedia"), "");
-					}
-					textview3.setText("Voicebank: ".concat(edittext1.getText().toString().concat(" ".concat(currentReclist))));
-					currentRec = 0;
-					try {
-						java.io.InputStream inputstream1 = getAssets().open(currentReclist.concat(".json"));
-						samp = new Gson().fromJson(AppUtil.copyFromInputStream(inputstream1), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
-						throw new java.io.IOException();
-					} catch(java.io.IOException e) {
-						e.printStackTrace();
-					}
-					_updateTXTViews(currentRec);
-					listview1.setAdapter(new Listview1Adapter(samp));
-					((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-					_enableAll(true);
+				
+				currentReclist = reclist.get((int) (spinner1.getSelectedItemPosition()));
+				
+				if (currentReclist == "Custom") {
+					Intent pickFile = new Intent(Intent.ACTION_GET_CONTENT);
+					pickFile.setType("*/*");
+					startActivityForResult(pickFile, 0);
+				} else {
+					_setupRecording(null);
 				}
 			}
 		});
@@ -136,7 +125,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
 				final int _position = _param3;
-				_updateTXTViews(_position);
+				_updateTextViews(_position);
 				currentRec = _position;
 			}
 		});
@@ -173,8 +162,8 @@ public class MainActivity extends Activity {
 							} catch(java.io.IOException e) {
 								e.printStackTrace();
 							}
-							set.setEnabled(true);
 							_enableAll(true);
+							set.setEnabled(true);
 							AppUtil.showMessage(getApplicationContext(), "Done!");
 							playsamp.reset();
 							((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
@@ -204,8 +193,8 @@ public class MainActivity extends Activity {
 				record.setVisibility(View.VISIBLE);
 				stop.setVisibility(View.GONE);
 				set.setEnabled(true);
-				((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 				_enableAll(true);
+				((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 				AppUtil.showMessage(getApplicationContext(), "Done!");
 			}
 		});
@@ -215,8 +204,8 @@ public class MainActivity extends Activity {
 			public void onClick(View _view) {
 				if (FileUtil.isExistFile(filePath.concat("/".concat(samp.get((int)currentRec).get(saveAs).toString()).concat(".wav")))) {
 					playsamp = MediaPlayer.create(getApplicationContext(), Uri.parse(filePath + "/" + samp.get((int)currentRec).get(saveAs).toString() + ".wav"));
-					
 					playsamp.start();
+						
 					_enableAll(false);
 					playsamp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 					    @Override
@@ -244,8 +233,8 @@ public class MainActivity extends Activity {
 			public void onClick(View _view) {
 				if (FileUtil.isExistFile(filePath.concat("/".concat(samp.get((int)currentRec).get(saveAs).toString()).concat(".wav")))) {
 					AlertDialog.Builder delSampDlg = new AlertDialog.Builder(MainActivity.this);
-					delSampDlg.setTitle("Delete Sample");
-					delSampDlg.setMessage("Are you sure you want to delete this sample?");
+					delSampDlg.setTitle(R.string.delsamp_title);
+					delSampDlg.setMessage(R.string.delsamp_content);
 					delSampDlg.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface _dialog, int _which) {
@@ -266,13 +255,12 @@ public class MainActivity extends Activity {
 		prev.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				currentRec--;
-				if (currentRec == -1) {
-					currentRec++;
-					AppUtil.showMessage(getApplicationContext(), "Beginning.");
+				if (currentRec == 0) {
+					AppUtil.showMessage(getApplicationContext(), "Start");
 				}
 				else {
-					_updateTXTViews(currentRec);
+					currentRec--;
+					_updateTextViews(currentRec);
 				}
 			}
 		});
@@ -280,44 +268,40 @@ public class MainActivity extends Activity {
 		next.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				currentRec++;
-				if (currentRec == samp.size()) {
-					currentRec--;
-					AppUtil.showMessage(getApplicationContext(), "End.");
+				if (currentRec == (samp.size() - 1)) {
+					AppUtil.showMessage(getApplicationContext(), "End");
 				}
 				else {
-					_updateTXTViews(currentRec);
+					currentRec++;
+					_updateTextViews(currentRec);
 				}
 			}
 		});
 	}
 	
 	private void initializeLogic() {
-		if (settings.getString("audioFx", "").equals("")) {
-			settings.edit().putString("audioFx", "normal").commit();
-			audioEffect = "normal";
-		}
-		else {
-			audioEffect = settings.getString("audioFx", null);
-		}
-		if (settings.getString("saveAs", "").equals("")) {
-			settings.edit().putString("saveAs", "romaji").commit();
-			saveAs = "romaji";
-		}
-		else {
-			saveAs = settings.getString("saveAs", "");
-		}
-		if (settings.getString("theme", "").equals("")) {
-			settings.edit().putString("theme", "light").commit();
-		}
+		
+		audioEffect = settings.getString("audioFx", "normal");
+		saveAs = settings.getString("saveAs", "romaji");
+		
 		reclist.add("CV");
 		reclist.add("VCV");
+		reclist.add("Custom");
+			
 		spinner1.setAdapter(new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item, reclist));
 		((ArrayAdapter)spinner1.getAdapter()).notifyDataSetChanged();
 		stop.setVisibility(View.GONE);
 		_enableAll(false);
 	}
-	
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            _setupRecording(data.getData());
+        }
+    }
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 0, 0, "Settings");
@@ -346,8 +330,7 @@ public class MainActivity extends Activity {
 		recorder = OmRecorder.wav(new PullTransport.Default(mic(audioEffect)), new java.io.File(filePath +"/"+ _samp+".wav")); 
 	}
 	
-	
-	public void _updateTXTViews(final double _pos) {
+	public void _updateTextViews(final double _pos) {
 		textview4.setText(samp.get((int)_pos).get("hiragana").toString());
 		textview2.setText(samp.get((int)_pos).get("romaji").toString());
 	}
@@ -435,8 +418,8 @@ public class MainActivity extends Activity {
 	
 	public void _showAbout() {
 		AlertDialog.Builder aboutDialog = new AlertDialog.Builder(MainActivity.this);
-		aboutDialog.setTitle("About");
-		aboutDialog.setMessage("Rekuta - Record Your Own UTAU\n\nMade by Mashi\n\nCredits:\nOremo (BGM)\n\nOpen Source Library:\nOMRecorder (Apache-2.0 license)");
+		aboutDialog.setTitle(R.string.about_title);
+		aboutDialog.setMessage(R.string.about_content);
 		aboutDialog.setPositiveButton("Okay", null);
 		aboutDialog.create().show();
 	}
@@ -461,6 +444,52 @@ public class MainActivity extends Activity {
 		else {
 			listview1.setVisibility(View.GONE);
 		}
+	}
+	
+	public void _setupRecording(Uri _uri) {
+
+        String folderName;
+        
+		if (currentReclist.equals("Custom")) {
+            folderName = edittext1.getText().toString();
+        } else {
+            folderName = edittext1.getText().toString().concat(" ".concat(currentReclist));
+        }
+
+        filePath = FileUtil.getExternalStorageDir().concat("/Rekuta/".concat(folderName));
+        currentRec = 0;
+        if (!FileUtil.isExistFile(filePath)) {
+            FileUtil.makeDir(filePath);
+            FileUtil.writeFile(filePath.concat("/.nomedia"), "");
+        }
+        textview3.setText("Voicebank: ".concat(folderName));
+
+        try {
+			InputStream inputstream1;
+			
+			if (_uri != null && currentReclist.equals("Custom")) {
+				inputstream1 = getContentResolver().openInputStream(_uri);
+				String[] listSamps = AppUtil.copyFromInputStream(inputstream1).split("\\s+");
+				samp.clear();
+				for (String str : listSamps) {
+					HashMap<String, Object> hashMap = new HashMap<String, Object>();
+					hashMap.put("hiragana", str);
+					hashMap.put("romaji", str);
+					samp.add(hashMap);
+				}
+			} else {
+				inputstream1 = getAssets().open(currentReclist.concat(".json"));
+				samp = new Gson().fromJson(AppUtil.copyFromInputStream(inputstream1),new TypeToken<ArrayList<HashMap<String, Object>>>() {}.getType());	
+			}
+			
+            throw new java.io.IOException();
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+        _updateTextViews(currentRec);
+        listview1.setAdapter(new Listview1Adapter(samp));
+        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
+        _enableAll(true);
 	}
 	
     private PullableSource mic(String strSet) {

@@ -5,6 +5,7 @@ import android.app.*;
 import android.app.Activity;
 import android.content.*;
 import android.content.Intent;
+import android.content.pm.*;
 import android.content.res.*;
 import android.os.*;
 import android.text.*;
@@ -23,6 +24,11 @@ public class SetupActivity extends Activity {
 	private Button button1;
 	
 	private Intent main = new Intent();
+	private String[] perms = new String[] {
+		android.Manifest.permission.READ_EXTERNAL_STORAGE,
+		android.Manifest.permission.RECORD_AUDIO,
+		android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+	};
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -39,8 +45,7 @@ public class SetupActivity extends Activity {
 			@Override
 			public void onClick(View _view) {
 				if (Build.VERSION.SDK_INT >= 23) {
-					requestPermissions(new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE,
-						android.Manifest.permission.RECORD_AUDIO, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+					requestPermissions(perms, 1000);
 				}
 			}
 		});
@@ -52,14 +57,13 @@ public class SetupActivity extends Activity {
 		_checkPermissions();
 	}
 	
+	
 	public void _checkPermissions() {
 		if (Build.VERSION.SDK_INT >= 23) {
-			if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_GRANTED
-				&& checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == android.content.pm.PackageManager.PERMISSION_GRANTED
-				&& checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
-				    main.setClass(getApplicationContext(), MainActivity.class);
-				    startActivity(main);
-				    finish();
+			if (hasPermissions(perms)) {
+				main.setClass(getApplicationContext(), MainActivity.class);
+				startActivity(main);
+				finish();
 			}
 		}
 		else {
@@ -67,6 +71,18 @@ public class SetupActivity extends Activity {
 			startActivity(main);
 			finish();
 		}
+	}
+
+	public boolean hasPermissions(String... permissions) {
+		if (permissions != null) {
+			for (String permission : permissions) {
+					if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
 	}
 	
 }

@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:orientation="vertical">
+	 xmlns:android="http://schemas.android.com/apk/res/android"
+	 xmlns:app="http://schemas.android.com/apk/res-auto"
+	 xmlns:tools="http://schemas.android.com/tools"
+	 android:layout_height="match_parent"
+	 android:layout_width="match_parent"
+	 android:orientation="vertical">
 
-    <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:padding="8dp"
-         android:orientation="horizontal"
-         android:id="@+id/linear1">
+	<LinearLayout
+		 android:layout_height="wrap_content"
+		 android:layout_width="match_parent"
+		 android:padding="8dp"
+		 android:orientation="horizontal"
+		 android:id="@+id/linear1">
 
-        <LinearLayout
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:orientation="vertical"
-             android:layout_weight="1"
-             android:id="@+id/linear2">
+		<LinearLayout
+			 android:layout_height="wrap_content"
+			 android:layout_width="match_parent"
+			 android:orientation="vertical"
+			 android:layout_weight="1"
+			 android:id="@+id/linear2">
 
-            <TextView
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:paddingRight="8dp"
-                 android:paddingBottom="4dp"
-                 android:textSize="14sp"
-                 android:paddingLeft="8dp"
-                 android:textColor="#000000"
-                 android:focusable="false"
-                 android:id="@+id/textview1"
-                 android:paddingTop="8dp"
-                 android:text="ああいあうえあ" />
+			<TextView
+				 android:layout_height="wrap_content"
+				 android:layout_width="wrap_content"
+				 android:paddingRight="8dp"
+				 android:paddingBottom="4dp"
+				 android:textSize="14sp"
+				 android:paddingLeft="8dp"
+				 android:textColor="#000000"
+				 android:focusable="false"
+				 android:id="@+id/textview1"
+				 android:paddingTop="8dp"
+				 android:text="ああいあうえあ" />
 
-            <TextView
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:paddingRight="8dp"
-                 android:paddingBottom="8dp"
-                 android:textSize="12sp"
-                 android:paddingLeft="8dp"
-                 android:textColor="#000000"
-                 android:focusable="false"
-                 android:id="@+id/textview2"
-                 android:paddingTop="4dp"
-                 android:text="a_a_i_a_u_e_a" />
+			<TextView
+				 android:layout_height="wrap_content"
+				 android:layout_width="wrap_content"
+				 android:paddingRight="8dp"
+				 android:paddingBottom="8dp"
+				 android:textSize="12sp"
+				 android:paddingLeft="8dp"
+				 android:textColor="#000000"
+				 android:focusable="false"
+				 android:id="@+id/textview2"
+				 android:paddingTop="4dp"
+				 android:text="a_a_i_a_u_e_a" />
 
-        </LinearLayout>
+		</LinearLayout>
 
-        <ImageView
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:src="@drawable/ic_check_box_outline_blank_black"
-             android:scaleType="center"
-             android:focusable="false"
-             android:id="@+id/imageview1" />
+		<ImageView
+			 android:layout_height="wrap_content"
+			 android:layout_width="wrap_content"
+			 android:src="@drawable/ic_check_box_outline_blank_black"
+			 android:scaleType="center"
+			 android:focusable="false"
+			 android:id="@+id/imageview1" />
 
-    </LinearLayout>
+	</LinearLayout>
 
 </LinearLayout>
