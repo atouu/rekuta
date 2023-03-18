@@ -1,3 +1,5 @@
 .androidide
 .gradle
 app/build
+keystore.properties
+release.keystore

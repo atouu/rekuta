@@ -54,7 +54,6 @@ public class MainActivity extends Activity {
 	private String currentReclist = "";
 	private Recorder recorder;
 	
-	private ArrayList<String> reclist = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> samp = new ArrayList<>();
 	      
 	private EditText edittext1;
@@ -109,9 +108,9 @@ public class MainActivity extends Activity {
 					return;
 				}
 				
-				currentReclist = reclist.get((int) (spinner1.getSelectedItemPosition()));
+				currentReclist =  spinner1.getSelectedItem().toString();
 				
-				if (currentReclist == "Custom") {
+				if (currentReclist.equals("Custom")) {
 					Intent pickFile = new Intent(Intent.ACTION_GET_CONTENT);
 					pickFile.setType("*/*");
 					startActivityForResult(pickFile, 0);
@@ -213,7 +212,7 @@ public class MainActivity extends Activity {
 							_enableAll(true);
 							AppUtil.showMessage(getApplicationContext(), "Done!");
 					    }
-                    });
+					});
 				}
 				else {
 					AppUtil.showMessage(getApplicationContext(), "No recorded sample yet.");
@@ -280,27 +279,23 @@ public class MainActivity extends Activity {
 	}
 	
 	private void initializeLogic() {
+		String[] reclist = {"CV", "VCV", "Custom"};
 		
 		audioEffect = settings.getString("audioFx", "normal");
 		saveAs = settings.getString("saveAs", "romaji");
-		
-		reclist.add("CV");
-		reclist.add("VCV");
-		reclist.add("Custom");
 			
 		spinner1.setAdapter(new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item, reclist));
-		((ArrayAdapter)spinner1.getAdapter()).notifyDataSetChanged();
 		stop.setVisibility(View.GONE);
 		_enableAll(false);
 	}
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK) {
-            _setupRecording(data.getData());
-        }
-    }
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 0 && resultCode == RESULT_OK) {
+			_setupRecording(data.getData());
+		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -340,7 +335,7 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder settingsDialog = new AlertDialog.Builder(MainActivity.this);
 		settingsDialog.setTitle("Settings");
 		LayoutInflater inflater = getLayoutInflater();
-		View convertView = (View) inflater.inflate(R.layout.settings, null);
+		View convertView = inflater.inflate(R.layout.settings, null);
 		
 		final Switch switch1 = (Switch) convertView.findViewById(R.id.switch1);
 		final Switch switch2 = (Switch) convertView.findViewById(R.id.switch2);
@@ -369,7 +364,7 @@ public class MainActivity extends Activity {
 			}
 		}
 		
-		if (saveAs.equals("hiragana")) switch3.setChecked(true);
+		switch3.setChecked(saveAs.equals("hiragana"));
 		
 		settingsDialog.setView(convertView);
 		
@@ -438,31 +433,23 @@ public class MainActivity extends Activity {
 		else {
 			bgm.setEnabled(_enable);
 		}
-		if (_enable) {
-			listview1.setVisibility(View.VISIBLE);
-		}
-		else {
-			listview1.setVisibility(View.GONE);
-		}
+		
+		listview1.setVisibility(_enable ? View.VISIBLE : View.GONE);
 	}
 	
 	public void _setupRecording(Uri _uri) {
 
-        String folderName;
-        
-		if (currentReclist.equals("Custom")) {
-            folderName = edittext1.getText().toString();
-        } else {
-            folderName = edittext1.getText().toString().concat(" ".concat(currentReclist));
-        }
+        String folderName = currentReclist.equals("Custom")
+				? edittext1.getText().toString()
+				: edittext1.getText().toString().concat(" ".concat(currentReclist));
 
         filePath = FileUtil.getExternalStorageDir().concat("/Rekuta/".concat(folderName));
         currentRec = 0;
+		
         if (!FileUtil.isExistFile(filePath)) {
             FileUtil.makeDir(filePath);
             FileUtil.writeFile(filePath.concat("/.nomedia"), "");
         }
-        textview3.setText("Voicebank: ".concat(folderName));
 
         try {
 			InputStream inputstream1;
@@ -486,9 +473,11 @@ public class MainActivity extends Activity {
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
-        _updateTextViews(currentRec);
-        listview1.setAdapter(new Listview1Adapter(samp));
+		
+        textview3.setText("Voicebank: ".concat(folderName));
+		listview1.setAdapter(new Listview1Adapter(samp));
         ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
+		_updateTextViews(currentRec);
         _enableAll(true);
 	}
 	
