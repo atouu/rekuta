@@ -42,6 +42,11 @@ android {
 				signingConfig signingConfigs.release
 			}
 		}
+		debug {
+			if (keystorePropFile.exists()) {
+				signingConfig signingConfigs.release
+			}
+		}
 	}
 }
 

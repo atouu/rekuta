@@ -37,7 +37,7 @@ import java.util.Date;
 
 public class FileUtil {
 
-    private static void createNewFile(String path) {
+    public static void createNewFile(String path) {
         int lastSep = path.lastIndexOf(File.separator);
         if (lastSep > 0) {
             String dirPath = path.substring(0, lastSep);

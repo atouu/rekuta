@@ -25,11 +25,5 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity
-			android:name=".DebugActivity"
-			android:label="Rekuta Crashed!"
-			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
-			android:hardwareAccelerated="true" 
-			android:screenOrientation="portrait" />
 	</application>
 </manifest>
