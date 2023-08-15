@@ -1,5 +1,5 @@
 plugins {
-	id 'com.android.application'
+    id 'com.android.application'
 }
 
 def keystorePropFile = rootProject.file("keystore.properties")
@@ -9,45 +9,45 @@ if (keystorePropFile.exists()) {
 }
 
 android {
-	compileSdkVersion 28
-	
-	defaultConfig {
-		applicationId "com.rekuta.mashi"
-		minSdkVersion 21
-		targetSdkVersion 28
-		versionCode 3
-		versionName "0.2.1"
-	}
-	
-	signingConfigs {
-		if (keystorePropFile.exists()) {
-			release {
-				storeFile file(keystoreProp["RELEASE_STORE_FILE"])
-				storePassword keystoreProp["RELEASE_STORE_PASSWORD"]
-				keyAlias keystoreProp["RELEASE_KEY_ALIAS"]
-				keyPassword keystoreProp["RELEASE_KEY_PASSWORD"]
-			}
-		}
-	}
-	
-	lintOptions {
-		checkReleaseBuilds false
-	}
-	
-	buildTypes {
-		release {
-			minifyEnabled true
-			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-			if (keystorePropFile.exists()) {
-				signingConfig signingConfigs.release
-			}
-		}
-		debug {
-			if (keystorePropFile.exists()) {
-				signingConfig signingConfigs.release
-			}
-		}
-	}
+    compileSdkVersion 28
+    
+    defaultConfig {
+        applicationId "com.rekuta.mashi"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 3
+        versionName "0.2.1"
+    }
+    
+    signingConfigs {
+        if (keystorePropFile.exists()) {
+            release {
+                storeFile file(keystoreProp["RELEASE_STORE_FILE"])
+                storePassword keystoreProp["RELEASE_STORE_PASSWORD"]
+                keyAlias keystoreProp["RELEASE_KEY_ALIAS"]
+                keyPassword keystoreProp["RELEASE_KEY_PASSWORD"]
+            }
+        }
+    }
+    
+    lintOptions {
+        checkReleaseBuilds false
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (keystorePropFile.exists()) {
+                signingConfig signingConfigs.release
+            }
+        }
+        debug {
+            if (keystorePropFile.exists()) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
 }
 
 dependencies {

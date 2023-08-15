@@ -1,7 +1,7 @@
 <resources>
-	<string name="app_name" translatable="false">Rekuta</string>
-	<string name="about_title">About</string>
-	<string name="about_content">Rekuta - Record Your Own UTAU\n\nMade by Mashi\n\nCredits:\nOremo (BGM)\n\nOpen Source Library:\nOMRecorder (Apache-2.0 license)</string>
-	<string name="delsamp_title">Delete Sample</string>
-	<string name="delsamp_content">Are you sure you want to delete this sample?</string>
+    <string name="app_name" translatable="false">Rekuta</string>
+    <string name="about_title">About</string>
+    <string name="about_content">Rekuta - Record Your Own UTAU\n\nMade by Mashi\n\nCredits:\nOremo (BGM)\n\nOpen Source Library:\nOMRecorder (Apache-2.0 license)</string>
+    <string name="delsamp_title">Delete Sample</string>
+    <string name="delsamp_content">Are you sure you want to delete this sample?</string>
 </resources>
