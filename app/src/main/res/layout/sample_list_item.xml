@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     android:padding="8dp"
+     android:orientation="horizontal"
+     android:gravity="center">
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:padding="8dp"
+         android:orientation="vertical"
+         android:layout_weight="1">
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="14sp"
+             android:focusable="false"
+             android:id="@+id/textview1"
+             android:text="ああいあうえあ" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="12sp"
+             android:layout_marginTop="8dp"
+             android:focusable="false"
+             android:id="@+id/textview2"
+             android:text="a_a_i_a_u_e_a" />
+
+    </LinearLayout>
+
+    <ImageView
+         android:layout_height="wrap_content"
+         android:layout_width="wrap_content"
+         android:src="@drawable/ic_done_black"
+         android:tint="?android:attr/colorControlNormal"
+         android:padding="8dp"
+         android:visibility="gone"
+         android:scaleType="center"
+         android:focusable="false"
+         android:id="@+id/imageview1" />
+
+</LinearLayout>

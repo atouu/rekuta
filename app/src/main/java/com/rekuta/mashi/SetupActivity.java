@@ -21,9 +21,10 @@ public class SetupActivity extends Activity {
     @Override
     protected void onCreate(Bundle _savedInstanceState) {
         super.onCreate(_savedInstanceState);
+        checkPermissions();
+        getActionBar().hide();
         setContentView(R.layout.setup);
         initialize(_savedInstanceState);
-        checkPermissions();
     }
     
     private void initialize(Bundle _savedInstanceState) {   
@@ -57,8 +58,7 @@ public class SetupActivity extends Activity {
     }
     
     public void startMain() {
-        Intent main = new Intent();
-        main.setClass(getApplicationContext(), MainActivity.class);
+        Intent main = new Intent(this, MainActivity.class);
         startActivity(main);
         finish();
     }
@@ -66,7 +66,7 @@ public class SetupActivity extends Activity {
     public boolean hasPermissions(String... permissions) {
         if (permissions != null) {
             for (String permission : permissions) {
-                    if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                     return false;
                 }
             }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/configuration">
+        
+        <SwitchPreference
+            android:title="@string/use_kana_title"
+            android:defaultValue="false"
+            android:summary="@string/use_kana_summary"
+            android:key="useKana" />
+
+        <EditTextPreference
+            android:key="recordDelay"
+            android:defaultValue="4000"
+            android:hint="4000"
+            android:title="@string/record_delay_title"
+            android:summary="@string/record_delay_summary"
+            android:inputType="number" />
+
+        <SwitchPreference
+            android:title="@string/custom_bgm_title"
+            android:defaultValue="false"
+            android:summary="@string/custom_bgm_summary"
+            android:key="customBGM" />
+
+        <Preference
+            android:key="customBGMFile"
+            android:title="@string/custom_bgm_file_title"
+            android:defaultValue="None"
+            android:summary="None" />
+
+    </PreferenceCategory>
+    
+    <PreferenceCategory
+        android:title="@string/appearance">
+        
+        <SwitchPreference 
+            android:key="darkMode"
+            android:title="@string/dark_mode_title"
+            android:summary="@string/dark_mode_summary"/>
+        
+    </PreferenceCategory>
+
+</PreferenceScreen>

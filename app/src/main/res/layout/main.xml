@@ -1,232 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/linear1">
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:gravity="center_horizontal|center_vertical"
+         android:paddingRight="8dp"
+         android:orientation="horizontal"
+         android:paddingBottom="4dp"
+         android:paddingLeft="8dp"
+         android:paddingTop="4dp">
+
+        <EditText
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:hint="@string/enter_voicebank"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:singleLine="true"
+             android:layout_weight="1"
+             android:id="@+id/edittext1" />
+
+        <Button
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:id="@+id/set"
+             android:text="@string/set" />
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:gravity="center_vertical"
+         android:paddingRight="14dp"
+         android:orientation="horizontal"
+         android:paddingBottom="4dp"
+         android:paddingLeft="12dp"
+         android:paddingTop="4dp">
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="12sp"
+             android:text="@string/voicebank_is" />
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="12sp"
+             android:layout_weight="1"
+             android:id="@+id/textview3"
+             android:text="None" />
+
+        <Spinner
+             android:layout_height="wrap_content"
+             android:layout_width="85dp"
+             android:background="@drawable/spinner"
+             android:backgroundTint="?android:attr/colorControlNormal"
+             android:spinnerMode="dropdown"
+             android:dropDownWidth="85dp"
+             android:foreground="?android:attr/selectableItemBackgroundBorderless"
+             android:id="@+id/spinner1">
+
+        </Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="match_parent"
+         android:layout_width="match_parent"
+         android:gravity="center_horizontal|center_vertical"
+         android:orientation="vertical"
+         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:gravity="center_horizontal|center_vertical"
-            android:paddingRight="8dp"
-            android:orientation="horizontal"
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:id="@+id/linear2"
-            android:paddingTop="4dp">
-
-            <EditText
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:hint="Enter voicebank"
-                android:padding="8dp"
-                android:textColorHint="#607D8B"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:singleLine="true"
-                android:layout_weight="1"
-                android:id="@+id/edittext1" />
-
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:id="@+id/set"
-                android:text="Set" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:gravity="center_horizontal|center_vertical"
-            android:paddingRight="8dp"
-            android:orientation="horizontal"
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:id="@+id/linear13"
-            android:paddingTop="4dp">
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:gravity="center_horizontal|center_vertical"
+             android:padding="8dp"
+             android:orientation="vertical">
 
             <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:id="@+id/textview3"
-                android:text="Voicebank: None" />
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:paddingRight="8dp"
+                 android:paddingBottom="4dp"
+                 android:textSize="20sp"
+                 android:paddingLeft="8dp"
+                 android:id="@+id/textview4"
+                 android:paddingTop="8dp"
+                 android:text="@string/x_x" />
 
-            <Spinner
-                android:layout_height="match_parent"
-                android:layout_width="100dp"
-                android:padding="8dp"
-                android:spinnerMode="dropdown"
-                android:id="@+id/spinner1">
-
-            </Spinner>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:gravity="center_horizontal|center_vertical"
-            android:orientation="vertical"
-            android:layout_weight="1"
-            android:id="@+id/linear7">
-
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal|center_vertical"
-                android:padding="8dp"
-                android:orientation="vertical"
-                android:id="@+id/linear11">
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="4dp"
-                    android:textSize="20sp"
-                    android:paddingLeft="8dp"
-                    android:textColor="#000000"
-                    android:id="@+id/textview4"
-                    android:paddingTop="8dp"
-                    android:text="X_X" />
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="14sp"
-                    android:paddingLeft="8dp"
-                    android:textColor="#000000"
-                    android:id="@+id/textview2"
-                    android:paddingTop="4dp"
-                    android:text="Set your voicebank folder." />
-
-            </LinearLayout>
-
-            <ListView
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"
-                android:padding="8dp"
-                android:choiceMode="none"
-                android:layout_weight="1"
-                android:id="@+id/listview1">
-
-            </ListView>
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:paddingRight="8dp"
+                 android:paddingBottom="8dp"
+                 android:textSize="14sp"
+                 android:paddingLeft="8dp"
+                 android:id="@+id/textview2"
+                 android:paddingTop="4dp"
+                 android:text="@string/no_voicebank" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingRight="8dp"
-            android:orientation="horizontal"
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:id="@+id/linear12"
-            android:paddingTop="8dp">
+        <ListView
+             android:layout_height="match_parent"
+             android:layout_width="match_parent"
+             android:padding="8dp"
+             android:choiceMode="none"
+             android:layout_weight="1"
+             android:id="@+id/listview1">
 
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:id="@+id/record"
-                android:text="Record" />
+        </ListView>
 
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:id="@+id/stop"
-                android:text="Stop" />
+    </LinearLayout>
 
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:id="@+id/play"
-                android:text="Play" />
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:paddingRight="8dp"
+         android:orientation="horizontal"
+         android:paddingBottom="4dp"
+         android:paddingLeft="8dp"
+         android:paddingTop="8dp">
 
-        </LinearLayout>
+        <Button
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:layout_weight="1"
+             android:id="@+id/record"
+             android:text="@string/record" />
 
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingRight="8dp"
-            android:orientation="horizontal"
-            android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
-            android:id="@+id/linear8"
-            android:paddingTop="4dp">
+        <Button
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:layout_weight="1"
+             android:id="@+id/stop"
+             android:text="@string/stop" />
 
-            <ToggleButton
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:textOn="BGM\u0020ON"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:textOff="BGM\u0020OFF"
-                android:id="@+id/bgm"
-                android:text="BGM" />
+        <Button
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:layout_weight="1"
+             android:id="@+id/play"
+             android:text="@string/play" />
 
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:id="@+id/del"
-                android:text="Delete" />
+    </LinearLayout>
 
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:id="@+id/prev"
-                android:text="Previous" />
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:paddingRight="8dp"
+         android:orientation="horizontal"
+         android:paddingBottom="8dp"
+         android:paddingLeft="8dp"
+         android:paddingTop="4dp">
 
-            <Button
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:padding="8dp"
-                android:textSize="12sp"
-                android:textColor="#000000"
-                android:layout_weight="1"
-                android:id="@+id/next"
-                android:text="Next" />
+        <ToggleButton
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textOn="@string/bgm_on"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:textOff="@string/bgm_off"
+             android:layout_weight="1"
+             android:id="@+id/bgm" />
 
-        </LinearLayout>
+        <Button
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:layout_weight="1"
+             android:id="@+id/del"
+             android:text="@string/delete" />
+
+        <Button
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:layout_weight="1"
+             android:id="@+id/prev"
+             android:text="@string/previous" />
+
+        <Button
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:padding="8dp"
+             android:textSize="12sp"
+             android:layout_weight="1"
+             android:id="@+id/next"
+             android:text="@string/next" />
 
     </LinearLayout>
 

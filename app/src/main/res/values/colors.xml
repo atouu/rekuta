@@ -4,4 +4,10 @@
     <color name="colorAccent">#008DCD</color>
     <color name="colorControlHighlight">#008DCD</color>
     <color name="colorControlNormal">#57BEEE</color>
+    
+    <color name="darkColorPrimary">#424242</color>
+    <color name="darkColorPrimaryDark">#212121</color>
+    <color name="darkColorAccent">#9E9E9E</color>
+    <color name="darkColorControlHighlight">#E0E0E0</color>
+    <color name="darkColorControlNormal">#9E9E9E</color>
 </resources>

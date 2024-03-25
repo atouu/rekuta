@@ -15,10 +15,15 @@
             android:hardwareAccelerated="true" 
             android:screenOrientation="portrait" />
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/settings_title"
+            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+            android:hardwareAccelerated="true" 
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SetupActivity"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
             android:hardwareAccelerated="true" 
-            android:theme="@style/NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

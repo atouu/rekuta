@@ -9,14 +9,14 @@ if (keystorePropFile.exists()) {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     
     defaultConfig {
         applicationId "com.rekuta.mashi"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3
-        versionName "0.2.1"
+        versionCode 4
+        versionName "0.3.0"
     }
     
     signingConfigs {
@@ -48,9 +48,4 @@ android {
             }
         }
     }
-}
-
-dependencies {
-    implementation 'com.google.code.gson:gson:2.8.7'
-    implementation 'com.kailashdabhi:om-recorder:1.1.5'
 }
