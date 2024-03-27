@@ -128,6 +128,19 @@
     <LinearLayout
          android:layout_height="wrap_content"
          android:layout_width="match_parent"
+         android:gravity="center">
+
+        <TextView
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="12sp"
+             android:id="@+id/textview5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
          android:paddingRight="8dp"
          android:orientation="horizontal"
          android:paddingBottom="4dp"

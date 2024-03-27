@@ -41,7 +41,7 @@
          android:src="@drawable/ic_done_black"
          android:tint="?android:attr/colorControlNormal"
          android:padding="8dp"
-         android:visibility="gone"
+         android:visibility="invisible"
          android:scaleType="center"
          android:focusable="false"
          android:id="@+id/imageview1" />

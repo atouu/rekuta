@@ -20,6 +20,7 @@ public class MainActivity extends Activity {
     private int recordDelay = 0;
     private boolean withBGM = false;
     private boolean customBgm = false;
+    private boolean useKana = false;
     private String customBgmFile = "";
     private String currentRecFile = "";
     private String voicebankDir = "";
@@ -27,12 +28,13 @@ public class MainActivity extends Activity {
     private String currentReclist = "";
     private String rekutaDir = "";
     
-    private ArrayList<HashMap<String, String>> sampleList =  new ArrayList<>();
+    private ArrayList<HashMap<String, String>> sampleList;
               
     private EditText edittext1;
     private TextView textview3;
     private TextView textview4;
     private TextView textview2;
+    private TextView textview5;
     private Spinner spinner1; 
     private ListView listview1;
     private ToggleButton bgm;
@@ -62,6 +64,7 @@ public class MainActivity extends Activity {
         textview3 = findViewById(R.id.textview3);
         textview4 = findViewById(R.id.textview4);
         textview2 = findViewById(R.id.textview2);
+        textview5 = findViewById(R.id.textview5);
         spinner1 = findViewById(R.id.spinner1); 
         listview1 = findViewById(R.id.listview1);
         bgm = findViewById(R.id.bgm);
@@ -171,6 +174,7 @@ public class MainActivity extends Activity {
                         FileUtil.deleteFile(currentRecFile);
                         ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
                         AppUtil.showMessage(getApplicationContext(), R.string.deleted);
+                        totalRecords();
                     }
                 });
                 delSampDlg.setNegativeButton(R.string.no, null);
@@ -206,7 +210,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        boolean useKana = settings.getBoolean("useKana", false);
+        useKana = settings.getBoolean("useKana", false);
         saveAs = (useKana | currentReclist.equals("Custom")) ? "hiragana" : "romaji";
         customBgm = settings.getBoolean("customBGM", false);
         customBgmFile = settings.getString("customBGMFile", "None");
@@ -300,6 +304,7 @@ public class MainActivity extends Activity {
     
     public void enableAll(boolean enable) {
         listview1.setVisibility(enable ? View.VISIBLE : View.GONE);
+        textview5.setVisibility(enable ? View.VISIBLE : View.GONE);
         bgm.setEnabled(enable);
         del.setEnabled(enable);
         next.setEnabled(enable);
@@ -323,18 +328,21 @@ public class MainActivity extends Activity {
             InputStream inputstream1;
             
             if (uri != null && currentReclist.equals("Custom")) {
+                saveAs = "hiragana";
                 inputstream1 = getContentResolver().openInputStream(uri);
                 String[] listSamps = AppUtil.copyFromInputStream(inputstream1, "Shift_JIS").split("\\s+");
-                sampleList.clear();
+                sampleList = new ArrayList<>();
                 for (String str : listSamps) {
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("hiragana", str);
                     sampleList.add(hashMap);
                 }
             } else {
+                saveAs = useKana ? "hiragana" : "romaji";
                 inputstream1 = getAssets().open(currentReclist.concat(".json"));
                 sampleList = AppUtil.getFromJSONArray(AppUtil.copyFromInputStream(inputstream1, "UTF-8"));
             }
+            totalRecords();
             throw new IOException();
         } catch (IOException e) {
             e.printStackTrace();
@@ -392,11 +400,23 @@ public class MainActivity extends Activity {
     }
     
     public void stopRecording() {
+        ((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
         set.setEnabled(true);
         recorder.stopRecording();
         enableAll(true);
-        ((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+        totalRecords();
         AppUtil.showMessage(getApplicationContext(), R.string.done);
+    }
+    
+    public void totalRecords() {
+        int total = 0;
+        ArrayList<String> fileNames = FileUtil.listFileNames(voicebankDir);
+        for (HashMap<String, String> element : sampleList) {
+            if (fileNames.contains(element.get(saveAs).concat(".wav"))) {
+                total++;
+            }
+        }
+        textview5.setText(String.format("%d/%d", total, sampleList.size()));
     }
     
     public class ReclistViewAdapter extends BaseAdapter {
@@ -444,7 +464,7 @@ public class MainActivity extends Activity {
             if (FileUtil.isExistFile(String.format("%s/%s.wav", voicebankDir, data.get(position).get(saveAs)))) {
                 imageview1.setVisibility(View.VISIBLE);
             } else {
-                imageview1.setVisibility(View.GONE);
+                imageview1.setVisibility(View.INVISIBLE);
             }
             
             return view;

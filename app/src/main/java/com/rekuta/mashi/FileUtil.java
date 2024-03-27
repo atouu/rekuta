@@ -199,18 +199,18 @@ public class FileUtil {
         }
     }
 
-    public static void listDir(String path, ArrayList<String> list) {
+    public static ArrayList<String> listFileNames(String path) {
+        ArrayList<String> fileNames = new ArrayList<>();
         File dir = new File(path);
-        if (!dir.exists() || dir.isFile()) return;
+        if (!dir.exists() || dir.isFile()) return fileNames;
 
         File[] listFiles = dir.listFiles();
-        if (listFiles == null || listFiles.length <= 0) return;
-
-        if (list == null) return;
-        list.clear();
+        if (listFiles == null || listFiles.length <= 0) return fileNames;
+        
         for (File file : listFiles) {
-            list.add(file.getAbsolutePath());
+            fileNames.add(file.getName());
         }
+        return fileNames;
     }
 
     public static boolean isDirectory(String path) {
