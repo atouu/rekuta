@@ -6,18 +6,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
+import android.widget.EditText;
 
 public class SettingsActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppUtil.checkThemePreference(this);
+        Utils.checkThemePreference(this);
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
@@ -25,8 +26,10 @@ public class SettingsActivity extends PreferenceActivity {
     public static class SettingsFragment extends PreferenceFragment {
         private String customBgmFile;
         private boolean darkMode;
+        private EditText customBgmFileEditText;
         private SwitchPreference customBgmPref;
-        private EditTextPreference recordDelayPref;
+        private EditTextPreference recordStartPref;
+        private EditTextPreference recordEndPref;
         private Preference customBgmFilePref;
         private SharedPreferences sharedPrefs;
         private SwitchPreference darkModePref;
@@ -39,18 +42,17 @@ public class SettingsActivity extends PreferenceActivity {
         }
         
         private void initialize() {
-            sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            sharedPrefs = getPreferenceManager().getDefaultSharedPreferences(getActivity());
             customBgmFilePref = (Preference) findPreference("customBGMFile");
             customBgmPref = (SwitchPreference) findPreference("customBGM");
-            recordDelayPref = (EditTextPreference) findPreference("recordDelay");
+            recordStartPref = (EditTextPreference) findPreference("recordStart");
+            recordEndPref = (EditTextPreference) findPreference("recordEnd");
             darkModePref = (SwitchPreference) findPreference("darkMode");
             customBgmFile = sharedPrefs.getString("customBGMFile", "None");
-            darkMode = sharedPrefs.getBoolean("darkMode", false);
+            darkMode = customBgmPref.isChecked();
             
-            if (customBgmFile.equals("None")) {
-                customBgmFilePref.setSummary("None");
-            } else {
-                customBgmFilePref.setSummary(AppUtil.getFileName(getActivity(), Uri.parse(customBgmFile)));
+            if (!customBgmFile.equals("None")) {
+                customBgmFilePref.setSummary(Utils.getFileName(getActivity(), Uri.parse(customBgmFile)));
             }
             
             customBgmFilePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -65,17 +67,27 @@ public class SettingsActivity extends PreferenceActivity {
             customBgmPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     if (customBgmFile.equals("None")) {
-                        AppUtil.showMessage(getActivity(), R.string.specify_custom_bgm_first);
+                        Utils.showMessage(getActivity(), R.string.specify_custom_bgm_first);
                         return false;
                     }
                     return true;
                 }
             });
             
-            recordDelayPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            recordStartPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().equals("")) {
-                        recordDelayPref.setText("0");
+                    if (newValue.toString().isEmpty()) {
+                        recordStartPref.setText("0");
+                        return false;
+                    }
+                    return true;
+                }
+            });
+            
+            recordEndPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue.toString().isEmpty()) {
+                        recordEndPref.setText("0");
                         return false;
                     }
                     return true;
@@ -100,13 +112,13 @@ public class SettingsActivity extends PreferenceActivity {
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
             if (requestCode == 0 && resultCode == RESULT_OK) {
                 customBgmFile = data.getData().toString();
-                customBgmFilePref.setSummary(AppUtil.getFileName(getActivity(), data.getData()));
+                customBgmFilePref.setSummary(Utils.getFileName(getActivity(), data.getData()));
                 
                 ContentResolver resolver = getActivity().getContentResolver();
                 int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
                 resolver.takePersistableUriPermission(data.getData(), takeFlags);
                 
-                sharedPrefs.edit().putString("customBGMFile",data.getData().toString()).commit();
+                sharedPrefs.edit().putString("customBGMFile", data.getData().toString()).commit();
             }
         }
     }

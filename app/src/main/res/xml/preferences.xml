@@ -10,12 +10,19 @@
             android:key="useKana" />
 
         <EditTextPreference
-            android:key="recordDelay"
-            android:defaultValue="4000"
-            android:hint="4000"
-            android:title="@string/record_delay_title"
-            android:summary="@string/record_delay_summary"
+            android:key="recordStart"
+            android:defaultValue="4200"
+            android:hint="4200"
+            android:title="@string/record_start_title"
+            android:summary="@string/record_start_summary"
             android:inputType="number" />
+        
+        <EditTextPreference 
+            android:key="recordEnd"
+            android:defaultValue="9600" 
+            android:hint="9600"
+            android:title="@string/record_end_title"
+            android:summary="@string/record_end_summary" />
 
         <SwitchPreference
             android:title="@string/custom_bgm_title"

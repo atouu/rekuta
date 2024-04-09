@@ -48,4 +48,8 @@ android {
             }
         }
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }

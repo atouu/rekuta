@@ -40,8 +40,10 @@
     <string name="appearance">Appearance</string>
     <string name="use_kana_title">Use Kana as Filename</string>
     <string name="use_kana_summary">Saves your samples in Kana. Only applies for built-in reclists.</string>
-    <string name="record_delay_title">Record Delay</string>
-    <string name="record_delay_summary">Delay before the recording starts (in milliseconds).</string>
+    <string name="record_start_title">Recording Start</string>
+    <string name="record_start_summary">Delay before the recording starts (in milliseconds).</string>
+    <string name="record_end_title">Recording End</string>
+    <string name="record_end_summary">Delay before the recording ends (in milliseconds).</string>
     <string name="custom_bgm_title">Custom BGM</string>
     <string name="custom_bgm_summary">Use specified file as a background music.</string>
     <string name="custom_bgm_file_title">Custom BGM File</string>

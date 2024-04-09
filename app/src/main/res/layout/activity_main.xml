@@ -69,9 +69,7 @@
              android:spinnerMode="dropdown"
              android:dropDownWidth="85dp"
              android:foreground="?android:attr/selectableItemBackgroundBorderless"
-             android:id="@+id/spinner1">
-
-        </Spinner>
+             android:id="@+id/spinner1" />
 
     </LinearLayout>
 
@@ -119,9 +117,7 @@
              android:padding="8dp"
              android:choiceMode="none"
              android:layout_weight="1"
-             android:id="@+id/listview1">
-
-        </ListView>
+             android:id="@+id/listview1" />
 
     </LinearLayout>
 

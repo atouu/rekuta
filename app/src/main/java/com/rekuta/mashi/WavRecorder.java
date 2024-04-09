@@ -1,6 +1,5 @@
 package com.rekuta.mashi;
 
-import android.content.Context;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 

@@ -6,11 +6,11 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import com.rekuta.mashi.databinding.ActivitySetupBinding;
 
 public class SetupActivity extends Activity {
           
-    private Button button1;
+    private ActivitySetupBinding binding;
     
     private String[] perms = new String[] {
         android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -23,14 +23,11 @@ public class SetupActivity extends Activity {
         super.onCreate(_savedInstanceState);
         checkPermissions();
         getActionBar().hide();
-        setContentView(R.layout.setup);
-        initialize(_savedInstanceState);
-    }
-    
-    private void initialize(Bundle _savedInstanceState) {   
-        button1 = findViewById(R.id.button1);
+        setTheme(R.style.AppThemeLight);
+        binding = ActivitySetupBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         
-        button1.setOnClickListener(new View.OnClickListener() {
+        binding.button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View _view) {
                 if (Build.VERSION.SDK_INT >= 23) {
@@ -48,13 +45,11 @@ public class SetupActivity extends Activity {
     
     public void checkPermissions() {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (hasPermissions(perms)) {
-                startMain();
-            }
+            if (hasPermissions(perms)) startMain();
+            return;
         }
-        else {
-            startMain();
-        }
+        
+        startMain();
     }
     
     public void startMain() {

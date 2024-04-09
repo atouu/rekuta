@@ -11,13 +11,18 @@ import android.text.TextUtils;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
+import com.rekuta.mashi.databinding.ActivityMainBinding;
+import com.rekuta.mashi.databinding.SampleListItemBinding;
 import java.io.*;
 import java.util.*;
 
 public class MainActivity extends Activity {
     
+    private ActivityMainBinding binding;
+    
     private int currentRecPos = 0;
-    private int recordDelay = 0;
+    private int recordStart = 0;
+    private int recordEnd = 0;
     private boolean withBGM = false;
     private boolean customBgm = false;
     private boolean useKana = false;
@@ -29,55 +34,26 @@ public class MainActivity extends Activity {
     private String rekutaDir = "";
     
     private ArrayList<HashMap<String, String>> sampleList;
-              
-    private EditText edittext1;
-    private TextView textview3;
-    private TextView textview4;
-    private TextView textview2;
-    private TextView textview5;
-    private Spinner spinner1; 
-    private ListView listview1;
-    private ToggleButton bgm;
-    private Button set;
-    private Button record;
-    private Button stop;
-    private Button play;
-    private Button del;
-    private Button prev;
-    private Button next;
     
     private WavRecorder recorder;
     private MediaPlayer playBGM;
     private SharedPreferences settings;
+    private BaseAdapter sampleListAdapater;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AppUtil.checkThemePreference(this);
-        setContentView(R.layout.main);
+        Utils.checkThemePreference(this);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initialize(savedInstanceState);
         initializeLogic();
     }
     
     private void initialize(Bundle savedInstanceState) {      
-        edittext1 = findViewById(R.id.edittext1);
-        textview3 = findViewById(R.id.textview3);
-        textview4 = findViewById(R.id.textview4);
-        textview2 = findViewById(R.id.textview2);
-        textview5 = findViewById(R.id.textview5);
-        spinner1 = findViewById(R.id.spinner1); 
-        listview1 = findViewById(R.id.listview1);
-        bgm = findViewById(R.id.bgm);
-        set = findViewById(R.id.set);
-        record = findViewById(R.id.record);
-        stop = findViewById(R.id.stop);
-        play = findViewById(R.id.play);
-        del = findViewById(R.id.del);
-        prev = findViewById(R.id.prev);
-        next = findViewById(R.id.next); 
-        settings = getSharedPreferences(getPackageName().concat("_preferences"), Activity.MODE_PRIVATE);
+        settings = Utils.getDefaultSharedPreferences(this);
         
-        listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        binding.listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 updateStrings(position);
@@ -85,15 +61,15 @@ public class MainActivity extends Activity {
             }
         });
         
-        set.setOnClickListener(new View.OnClickListener() {
+        binding.set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(edittext1.getText())) {
-                    AppUtil.showMessage(getApplicationContext(), R.string.please_enter_vb_folder);
+                if (TextUtils.isEmpty(binding.edittext1.getText())) {
+                    Utils.showMessage(getApplicationContext(), R.string.please_enter_vb_folder);
                     return;
                 }
                 
-                currentReclist =  spinner1.getSelectedItem().toString();
+                currentReclist =  binding.spinner1.getSelectedItem().toString();
                 
                 if (currentReclist.equals("Custom")) {
                     Intent pickFile = new Intent(Intent.ACTION_GET_CONTENT);
@@ -105,34 +81,34 @@ public class MainActivity extends Activity {
             }
         });
         
-        record.setOnClickListener(new View.OnClickListener() {
+        binding.record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 recorder = new WavRecorder(currentRecFile);
                 if (withBGM) {
                     startRecordingWithBGM();
                 } else {
-                    record.setVisibility(View.GONE);
-                    stop.setVisibility(View.VISIBLE);
+                    binding.record.setVisibility(View.GONE);
+                    binding.stop.setVisibility(View.VISIBLE);
                     startRecording();
                 }
             }
         });
         
-        stop.setOnClickListener(new View.OnClickListener() {
+        binding.stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                record.setVisibility(View.VISIBLE);
-                stop.setVisibility(View.GONE);
+                binding.record.setVisibility(View.VISIBLE);
+                binding.stop.setVisibility(View.GONE);
                 stopRecording();
             }
         });
         
-        play.setOnClickListener(new View.OnClickListener() {
+        binding.play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!FileUtil.isExistFile(currentRecFile)) {
-                    AppUtil.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
+                    Utils.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
                     return;
                 }
                 
@@ -143,25 +119,25 @@ public class MainActivity extends Activity {
                     public void onCompletion(MediaPlayer mp) {
                         mp.release();
                         enableAll(true);
-                        AppUtil.showMessage(getApplicationContext(), R.string.done);
+                        Utils.showMessage(getApplicationContext(), R.string.done);
                     }
                 });
                 playSample.start();
             }
         });
 
-        bgm.setOnClickListener(new View.OnClickListener() {
+        binding.bgm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                withBGM = bgm.isChecked();
+                withBGM = binding.bgm.isChecked();
             }
         });
         
-        del.setOnClickListener(new View.OnClickListener() {
+        binding.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!FileUtil.isExistFile(currentRecFile)) {
-                    AppUtil.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
+                    Utils.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
                     return;
                 }
                 
@@ -172,8 +148,8 @@ public class MainActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         FileUtil.deleteFile(currentRecFile);
-                        ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-                        AppUtil.showMessage(getApplicationContext(), R.string.deleted);
+                        sampleListAdapater.notifyDataSetChanged();
+                        Utils.showMessage(getApplicationContext(), R.string.deleted);
                         totalRecords();
                     }
                 });
@@ -182,11 +158,11 @@ public class MainActivity extends Activity {
             }
         });
         
-        prev.setOnClickListener(new View.OnClickListener() {
+        binding.prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (currentRecPos == 0) {
-                    AppUtil.showMessage(getApplicationContext(), R.string.start);
+                    Utils.showMessage(getApplicationContext(), R.string.start);
                 } else {
                     currentRecPos--;
                     updateStrings(currentRecPos);
@@ -194,11 +170,11 @@ public class MainActivity extends Activity {
             }
         });
         
-        next.setOnClickListener(new View.OnClickListener() {
+        binding.next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (currentRecPos == (sampleList.size() - 1)) {
-                    AppUtil.showMessage(getApplicationContext(), R.string.end);
+                    Utils.showMessage(getApplicationContext(), R.string.end);
                 } else {
                     currentRecPos++;
                     updateStrings(currentRecPos);
@@ -211,10 +187,11 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         useKana = settings.getBoolean("useKana", false);
-        saveAs = (useKana | currentReclist.equals("Custom")) ? "hiragana" : "romaji";
+        saveAs = (useKana || currentReclist.equals("Custom")) ? "hiragana" : "romaji";
         customBgm = settings.getBoolean("customBGM", false);
         customBgmFile = settings.getString("customBGMFile", "None");
-        recordDelay = Integer.parseInt(settings.getString("recordDelay", "4000"));
+        recordStart = Integer.parseInt(settings.getString("recordStart", "4200"));
+        recordEnd = Integer.parseInt(settings.getString("recordEnd", "9600"));
     }
     
     private void initializeLogic() {
@@ -222,10 +199,10 @@ public class MainActivity extends Activity {
         
         rekutaDir = FileUtil.getExternalStorageDir().concat("/Rekuta");
         
-        FileUtil.createNewFile(rekutaDir.concat("/.nomedia"));;
+        FileUtil.createNewFile(rekutaDir.concat("/.nomedia"));
         
-        spinner1.setAdapter(new ArrayAdapter<String>(getBaseContext(), R.layout.spinner_item, reclist));
-        stop.setVisibility(View.GONE);
+        binding.spinner1.setAdapter(new ArrayAdapter<String>(getBaseContext(), R.layout.spinner_item, reclist));
+        binding.stop.setVisibility(View.GONE);
         enableAll(false);
     }
     
@@ -242,7 +219,7 @@ public class MainActivity extends Activity {
                 if (data.getBooleanExtra("toggleTheme", false)) {
                     recreate();
                 }
-            break;
+                break;
         }
     }
 
@@ -271,13 +248,13 @@ public class MainActivity extends Activity {
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             View v = getCurrentFocus();
-            if (edittext1.isFocused()) {
+            if (binding.edittext1.isFocused()) {
                 Rect outRect = new Rect();
-                edittext1.getGlobalVisibleRect(outRect);
+                binding.edittext1.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE); 
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                    edittext1.clearFocus();
+                    binding.edittext1.clearFocus();
                 }
             }
         }
@@ -286,11 +263,11 @@ public class MainActivity extends Activity {
     
     public void updateStrings(int pos) {
         currentRecFile = String.format("%s/%s.wav", voicebankDir, sampleList.get(pos).get(saveAs));
-        textview4.setText(sampleList.get(pos).get("hiragana"));
+        binding.textview4.setText(sampleList.get(pos).get("hiragana"));
         if (currentReclist.equals("Custom")) {
-            textview2.setVisibility(View.GONE);
+            binding.textview2.setVisibility(View.GONE);
         } else {
-            textview2.setText(sampleList.get(pos).get("romaji"));
+            binding.textview2.setText(sampleList.get(pos).get("romaji"));
         }
     }
     
@@ -303,20 +280,20 @@ public class MainActivity extends Activity {
     }
     
     public void enableAll(boolean enable) {
-        listview1.setVisibility(enable ? View.VISIBLE : View.GONE);
-        textview5.setVisibility(enable ? View.VISIBLE : View.GONE);
-        bgm.setEnabled(enable);
-        del.setEnabled(enable);
-        next.setEnabled(enable);
-        prev.setEnabled(enable);
-        play.setEnabled(enable);
-        record.setEnabled(enable);
+        binding.listview1.setVisibility(enable ? View.VISIBLE : View.GONE);
+        binding.textview5.setVisibility(enable ? View.VISIBLE : View.GONE);
+        binding.bgm.setEnabled(enable);
+        binding.del.setEnabled(enable);
+        binding.next.setEnabled(enable);
+        binding.prev.setEnabled(enable);
+        binding.play.setEnabled(enable);
+        binding.record.setEnabled(enable);
     }
     
     public void setupRecording(Uri uri) {
         String folderName = currentReclist.equals("Custom")
-            ? edittext1.getText().toString()
-            : edittext1.getText().toString().concat(" ").concat(currentReclist);
+            ? binding.edittext1.getText().toString()
+            : String.format("%s %s", binding.edittext1.getText(), currentReclist);
 
         voicebankDir = rekutaDir.concat("/").concat(folderName);
         withBGM = false;
@@ -330,7 +307,7 @@ public class MainActivity extends Activity {
             if (uri != null && currentReclist.equals("Custom")) {
                 saveAs = "hiragana";
                 inputstream1 = getContentResolver().openInputStream(uri);
-                String[] listSamps = AppUtil.copyFromInputStream(inputstream1, "Shift_JIS").split("\\s+");
+                String[] listSamps = Utils.copyFromInputStream(inputstream1, "Shift_JIS").split("\\s+");
                 sampleList = new ArrayList<>();
                 for (String str : listSamps) {
                     HashMap<String,String> hashMap = new HashMap<>();
@@ -340,25 +317,25 @@ public class MainActivity extends Activity {
             } else {
                 saveAs = useKana ? "hiragana" : "romaji";
                 inputstream1 = getAssets().open(currentReclist.concat(".json"));
-                sampleList = AppUtil.getFromJSONArray(AppUtil.copyFromInputStream(inputstream1, "UTF-8"));
+                sampleList = Utils.getFromJSONArray(Utils.copyFromInputStream(inputstream1, "UTF-8"));
             }
-            totalRecords();
-            throw new IOException();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        textview3.setText(folderName);
-        listview1.setAdapter(new ReclistViewAdapter(sampleList));
-        bgm.setChecked(withBGM);
+        binding.textview3.setText(folderName);
+        sampleListAdapater = new ReclistViewAdapter(sampleList);
+        binding.listview1.setAdapter(sampleListAdapater);
+        binding.bgm.setChecked(withBGM);
         updateStrings(currentRecPos);
         enableAll(true);
+        totalRecords();
     }
     
     public void startRecording() {
-        AppUtil.showMessage(getApplicationContext(), R.string.recording);
+        Utils.showMessage(getApplicationContext(), R.string.recording);
         recorder.startRecording();
-        set.setEnabled(false);
+        binding.set.setEnabled(false);
         enableAll(false);
     }
     
@@ -369,7 +346,7 @@ public class MainActivity extends Activity {
                 playBGM.setDataSource(getApplicationContext(), Uri.parse(customBgmFile));
                 playBGM.prepare();
             } catch(IOException e) {
-                AppUtil.showMessage(getApplicationContext(), R.string.custom_bgm_not_found);
+                Utils.showMessage(getApplicationContext(), R.string.custom_bgm_not_found);
                 return;
             }
         } else {
@@ -379,14 +356,19 @@ public class MainActivity extends Activity {
         playBGM.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                stopRecording();
+                sampleListAdapater.notifyDataSetChanged();
+                Utils.showMessage(getApplicationContext(), R.string.done);
+                binding.set.setEnabled(true);
+                enableAll(true);
+                totalRecords();
                 mp.release();
             }
         });
+        
         playBGM.start();
         
-        AppUtil.showMessage(getApplicationContext(), R.string.please_wait);
-        set.setEnabled(false);
+        Utils.showMessage(getApplicationContext(), R.string.please_wait);
+        binding.set.setEnabled(false);
         enableAll(false);
         
         Handler handler = new Handler();
@@ -394,18 +376,25 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 recorder.startRecording();
-                AppUtil.showMessage(getApplicationContext(), R.string.recording);
+                Utils.showMessage(getApplicationContext(), R.string.recording);
+                
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        recorder.stopRecording();
+                    }
+                }, recordEnd - recordStart);
             }
-        }, recordDelay);
+        }, recordStart);
     }
     
     public void stopRecording() {
-        ((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-        set.setEnabled(true);
+        sampleListAdapater.notifyDataSetChanged();
+        binding.set.setEnabled(true);
         recorder.stopRecording();
         enableAll(true);
         totalRecords();
-        AppUtil.showMessage(getApplicationContext(), R.string.done);
+        Utils.showMessage(getApplicationContext(), R.string.done);
     }
     
     public void totalRecords() {
@@ -416,7 +405,7 @@ public class MainActivity extends Activity {
                 total++;
             }
         }
-        textview5.setText(String.format("%d/%d", total, sampleList.size()));
+        binding.textview5.setText(String.format("%d/%d", total, sampleList.size()));
     }
     
     public class ReclistViewAdapter extends BaseAdapter {
@@ -443,31 +432,31 @@ public class MainActivity extends Activity {
         }
         
         @Override
-        public View getView(int position, View v, ViewGroup container) {
-            LayoutInflater inflater = getLayoutInflater();
-            View view = v;
-            if (view == null) {
-                view = inflater.inflate(R.layout.sample_list_item, null);
-            }
-                
-            ImageView imageview1 = view.findViewById(R.id.imageview1);
-            TextView textview1 = view.findViewById(R.id.textview1);
-            TextView textview2 = view.findViewById(R.id.textview2);
+        public View getView(int position, View convertView, ViewGroup container) {
+            SampleListItemBinding listBinding;
             
-            textview1.setText(data.get(position).get("hiragana"));
-            if (data.get(position).containsKey("romaji")) {
-                textview2.setText(data.get(position).get("romaji"));
+            if (convertView == null) {
+                listBinding = SampleListItemBinding.inflate(getLayoutInflater(), container, false);
+                convertView = listBinding.getRoot();
+                convertView.setTag(R.id.viewBinding, listBinding);
             } else {
-                textview2.setVisibility(View.GONE);
+                listBinding = ((SampleListItemBinding) convertView.getTag(R.id.viewBinding));
+            }
+            
+            listBinding.textview1.setText(data.get(position).get("hiragana"));
+            if (data.get(position).containsKey("romaji")) {
+                listBinding.textview2.setText(data.get(position).get("romaji"));
+            } else {
+                listBinding.textview2.setVisibility(View.GONE);
             }
             
             if (FileUtil.isExistFile(String.format("%s/%s.wav", voicebankDir, data.get(position).get(saveAs)))) {
-                imageview1.setVisibility(View.VISIBLE);
+                listBinding.imageview1.setVisibility(View.VISIBLE);
             } else {
-                imageview1.setVisibility(View.INVISIBLE);
+                listBinding.imageview1.setVisibility(View.INVISIBLE);
             }
             
-            return view;
+            return convertView;
         }
     }
 }

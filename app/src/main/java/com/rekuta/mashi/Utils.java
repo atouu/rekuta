@@ -1,23 +1,22 @@
 package com.rekuta.mashi;
 
-import android.app.*;
-import android.content.*;
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.net.Uri;
 import android.provider.OpenableColumns;
-import android.graphics.drawable.*;
-import android.net.*;
-import android.util.*;
-import android.view.*;
-import android.view.inputmethod.*;
-import android.widget.*;
-
-import java.io.*;
-import java.util.*;
+import android.widget.Toast;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class AppUtil {
+public class Utils {
     
     public static String copyFromInputStream(InputStream input, String encoding) {
         char[] buffer = new char[1024];
@@ -34,16 +33,6 @@ public class AppUtil {
         return out.toString();
     }
 
-    public static void hideKeyboard(Context context) {
-        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-    }
-
-    public static void showKeyboard(Context context) {
-        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-    }
-
     public static void showMessage(Context context, String s) {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
     }
@@ -52,8 +41,12 @@ public class AppUtil {
         Toast.makeText(context, r, Toast.LENGTH_SHORT).show();
     }
     
+    public static SharedPreferences getDefaultSharedPreferences(Context context) {
+        return context.getSharedPreferences(context.getPackageName().concat("_preferences"), Activity.MODE_PRIVATE);
+    }
+    
     public static void checkThemePreference(Context context) {
-        SharedPreferences settings = context.getSharedPreferences(context.getPackageName().concat("_preferences"), Activity.MODE_PRIVATE);
+        SharedPreferences settings = getDefaultSharedPreferences(context);
         if (settings.getBoolean("darkMode", false)) {
             context.setTheme(R.style.AppThemeDark);
         } else {
