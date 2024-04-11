@@ -6,13 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
-import android.widget.EditText;
 
 public class SettingsActivity extends PreferenceActivity {
 
@@ -26,7 +24,6 @@ public class SettingsActivity extends PreferenceActivity {
     public static class SettingsFragment extends PreferenceFragment {
         private String customBgmFile;
         private boolean darkMode;
-        private EditText customBgmFileEditText;
         private SwitchPreference customBgmPref;
         private EditTextPreference recordStartPref;
         private EditTextPreference recordEndPref;
@@ -49,7 +46,7 @@ public class SettingsActivity extends PreferenceActivity {
             recordEndPref = (EditTextPreference) findPreference("recordEnd");
             darkModePref = (SwitchPreference) findPreference("darkMode");
             customBgmFile = sharedPrefs.getString("customBGMFile", "None");
-            darkMode = customBgmPref.isChecked();
+            darkMode = darkModePref.isChecked();
             
             if (!customBgmFile.equals("None")) {
                 customBgmFilePref.setSummary(Utils.getFileName(getActivity(), Uri.parse(customBgmFile)));

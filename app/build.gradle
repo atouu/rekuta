@@ -9,6 +9,7 @@ if (keystorePropFile.exists()) {
 }
 
 android {
+    namespace "com.rekuta.mashi"
     compileSdkVersion 29
     
     defaultConfig {

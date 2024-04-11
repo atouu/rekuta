@@ -257,7 +257,7 @@ public class MainActivity extends Activity {
                     binding.edittext1.clearFocus();
                 }
             }
-        }
+        } 
         return super.dispatchTouchEvent(event);
     }
     
