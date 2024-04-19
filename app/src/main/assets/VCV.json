@@ -1,710 +1,179 @@
 [
-    {
-        "hiragana": "ああいあうえあ",
-        "romaji": "a_a_i_a_u_e_a"
-    },
-    {
-        "hiragana": "いいうあえいえ",
-        "romaji": "i_i_u_a_e_i_e"
-    },
-    {
-        "hiragana": "いいゆやいぇいいぇ",
-        "romaji": "i_i_yu_ya_ye_i_ye"
-    },
-    {
-        "hiragana": "いぇいぇゆよいぇよよ",
-        "romaji": "ye_ye_yu_yo_ye_yo_yo"
-    },
-    {
-        "hiragana": "うぃうぃうわうぇうぃうぇ",
-        "romaji": "wi_wi_u_wa_we_wi_we"
-    },
-    {
-        "hiragana": "うういおあおい",
-        "romaji": "u_u_i_o_a_o_i"
-    },
-    {
-        "hiragana": "うううぃうぉわうぉうぃ",
-        "romaji": "u_u_wi_wo_wa_wo_wi"
-    },
-    {
-        "hiragana": "うぇうぇううぉうぇうぉうぉ",
-        "romaji": "we_we_u_wo_we_wo_wo"
-    },
-    {
-        "hiragana": "うぉうんわんう",
-        "romaji": "wo_u_n_wa_n_u"
-    },
-    {
-        "hiragana": "ええうおえおお",
-        "romaji": "e_e_u_o_e_o_o"
-    },
-    {
-        "hiragana": "おうんあんんう",
-        "romaji": "o_u_n_a_n_n_u"
-    },
-    {
-        "hiragana": "かかきかくけか",
-        "romaji": "ka_ka_ki_ka_ku_ke_ka"
-    },
-    {
-        "hiragana": "ががぎがぐげが",
-        "romaji": "ga_ga_gi_ga_gu_ge_ga"
-    },
-    {
-        "hiragana": "きぇきぇきゅきょきぇきょきょ",
-        "romaji": "kye_kye_kyu_kyo_kye_kyo_kyo"
-    },
-    {
-        "hiragana": "ぎぇぎぇぎゅぎょぎぇぎょぎょ",
-        "romaji": "gye_gye_gyu_gyo_gye_gyo_gyo"
-    },
-    {
-        "hiragana": "きききゅきゃきぇききぇ",
-        "romaji": "ki_ki_kyu_kya_kye_ki_kye"
-    },
-    {
-        "hiragana": "ぎぎぎゅぎゃぎぇぎぎぇ",
-        "romaji": "gi_gi_gyu_gya_gye_gi_gye"
-    },
-    {
-        "hiragana": "ききくかけきけ",
-        "romaji": "ki_ki_ku_ka_ke_ki_ke"
-    },
-    {
-        "hiragana": "ぎぎぐがげぎげ",
-        "romaji": "gi_gi_gu_ga_ge_gi_ge"
-    },
-    {
-        "hiragana": "きゃきゃききゃきゅきぇきゃ",
-        "romaji": "kya_kya_ki_kya_kyu_kye_kya"
-    },
-    {
-        "hiragana": "ぎゃぎゃぎぎゃぎゅぎぇぎゃ",
-        "romaji": "gya_gya_gi_gya_gyu_gye_gya"
-    },
-    {
-        "hiragana": "きゅきゅききょきゃきょき",
-        "romaji": "kyu_kyu_ki_kyo_kya_kyo_ki"
-    },
-    {
-        "hiragana": "ぎゅぎゅぎぎょぎゃぎょぎ",
-        "romaji": "gyu_gyu_gi_gyo_gya_gyo_gi"
-    },
-    {
-        "hiragana": "きょきゅんきゃんきゅ",
-        "romaji": "kyo_kyu_n_kya_n_kyu"
-    },
-    {
-        "hiragana": "ぎょぎゅんぎゃんぎゅ",
-        "romaji": "gyo_gyu_n_gya_n_gyu"
-    },
-    {
-        "hiragana": "くくきこかこき",
-        "romaji": "ku_ku_ki_ko_ka_ko_ki"
-    },
-    {
-        "hiragana": "ぐぐぎごがごぎ",
-        "romaji": "gu_gu_gi_go_ga_go_gi"
-    },
-    {
-        "hiragana": "けけくこけここ",
-        "romaji": "ke_ke_ku_ko_ke_ko_ko"
-    },
-    {
-        "hiragana": "げげぐごげごご",
-        "romaji": "ge_ge_gu_go_ge_go_go"
-    },
-    {
-        "hiragana": "こくんかんく",
-        "romaji": "ko_ku_n_ka_n_ku"
-    },
-    {
-        "hiragana": "ごぐんがんぐ",
-        "romaji": "go_gu_n_ga_n_gu"
-    },
-    {
-        "hiragana": "ささすぃさすせさ",
-        "romaji": "sa_sa_si_sa_su_se_sa"
-    },
-    {
-        "hiragana": "ざざずぃざずぜざ",
-        "romaji": "za_za_zi_za_zu_ze_za"
-    },
-    {
-        "hiragana": "しぇしぇしゅしょしぇしょしょ",
-        "romaji": "she_she_shu_sho_she_sho_sho"
-    },
-    {
-        "hiragana": "じぇじぇじゅじょじぇじょじょ",
-        "romaji": "je_je_ju_jo_je_jo_jo"
-    },
-    {
-        "hiragana": "しししゅしゃしぇししぇ",
-        "romaji": "shi_shi_shu_sha_she_shi_she"
-    },
-    {
-        "hiragana": "じじじゅじゃじぇじじぇ",
-        "romaji": "ji_ji_ju_ja_je_ji_je"
-    },
-    {
-        "hiragana": "しゃしゃししゃしゅしぇしゃ",
-        "romaji": "sha_sha_shi_sha_shu_she_sha"
-    },
-    {
-        "hiragana": "じゃじゃじじゃじゅじぇじゃ",
-        "romaji": "ja_ja_ji_ja_ju_je_ja"
-    },
-    {
-        "hiragana": "しゅしゅししょしゃしょし",
-        "romaji": "shu_shu_shi_sho_sha_sho_shi"
-    },
-    {
-        "hiragana": "じゅじゅじじょじゃじょじ",
-        "romaji": "ju_ju_ji_jo_ja_jo_ji"
-    },
-    {
-        "hiragana": "しょしゅんしゃんしゅ",
-        "romaji": "sho_shu_n_sha_n_shu"
-    },
-    {
-        "hiragana": "じょじゅんじゃんじゅ",
-        "romaji": "jo_ju_n_ja_n_ju"
-    },
-    {
-        "hiragana": "すぃすぃすさせすぃせ",
-        "romaji": "si_si_su_sa_se_si_se"
-    },
-    {
-        "hiragana": "ずぃずぃずざぜずぃぜ",
-        "romaji": "zi_zi_zu_za_ze_zi_ze"
-    },
-    {
-        "hiragana": "すすすぃそさそすぃ",
-        "romaji": "su_su_si_so_sa_so_si"
-    },
-    {
-        "hiragana": "ずずずぃぞざぞずぃ",
-        "romaji": "zu_zu_zi_zo_za_zo_zi"
-    },
-    {
-        "hiragana": "せせすそせそそ",
-        "romaji": "se_se_su_so_se_so_so"
-    },
-    {
-        "hiragana": "ぜぜずぞぜぞぞ",
-        "romaji": "ze_ze_zu_zo_ze_zo_zo"
-    },
-    {
-        "hiragana": "そすんさんす",
-        "romaji": "so_su_n_sa_n_su"
-    },
-    {
-        "hiragana": "ぞずんざんず",
-        "romaji": "zo_zu_n_za_n_zu"
-    },
-    {
-        "hiragana": "たたてぃたとぅてた",
-        "romaji": "ta_ta_ti_ta_tu_te_ta"
-    },
-    {
-        "hiragana": "だだでぃだどぅでだ",
-        "romaji": "da_da_di_da_du_de_da"
-    },
-    {
-        "hiragana": "ちぇちぇちゅちょちぇちょちょ",
-        "romaji": "che_che_chu_cho_che_cho_cho"
-    },
-    {
-        "hiragana": "ちちちゅちゃちぇちちぇ",
-        "romaji": "chi_chi_chu_cha_che_chi_che"
-    },
-    {
-        "hiragana": "ちゃちゃちちゃちゅちぇちゃ",
-        "romaji": "cha_cha_chi_cha_chu_che_cha"
-    },
-    {
-        "hiragana": "ちゅちゅちちょちゃちょち",
-        "romaji": "chu_chu_chi_cho_cha_cho_chi"
-    },
-    {
-        "hiragana": "ちょちゅんちゃんちゅ",
-        "romaji": "cho_chu_n_cha_n_chu"
-    },
-    {
-        "hiragana": "つぁつぁつぃつぁつつぇつぁ",
-        "romaji": "tsa_tsa_tsi_tsa_tsu_tse_tsa"
-    },
-    {
-        "hiragana": "つぃつぃつつぁつぇつぃつぇ",
-        "romaji": "tsi_tsi_tsu_tsa_tse_tsi_tse"
-    },
-    {
-        "hiragana": "つぇつぇつつぉつぇつぉつぉ",
-        "romaji": "tse_tse_tsu_tso_tse_tso_tso"
-    },
-    {
-        "hiragana": "つぉつんつぁんつ",
-        "romaji": "tso_tsu_n_tsa_n_tsu"
-    },
-    {
-        "hiragana": "つつつぃつぉつぁつぉつぃ",
-        "romaji": "tsu_tsu_tsi_tso_tsa_tso_tsi"
-    },
-    {
-        "hiragana": "てぃてぃとぅたててぃて",
-        "romaji": "ti_ti_tu_ta_te_ti_te"
-    },
-    {
-        "hiragana": "でぃでぃどぅだででぃで",
-        "romaji": "di_di_du_da_de_di_de"
-    },
-    {
-        "hiragana": "てぃてゅあてゅてゅんびょ",
-        "romaji": "ti_tyu_a_tyu_tyu_n_byo"
-    },
-    {
-        "hiragana": "でぃでゅあでゅでゅんぴょ",
-        "romaji": "di_dyu_a_dyu_dyu_n_byo"
-    },
-    {
-        "hiragana": "ててとぅとてとと",
-        "romaji": "te_te_tu_to_te_to_to"
-    },
-    {
-        "hiragana": "ででどぅどでどど",
-        "romaji": "de_de_du_do_de_do_do"
-    },
-    {
-        "hiragana": "てゅえてゅおてゅんてゅ",
-        "romaji": "tyu_e_tyu_a_tyu_n_tyu"
-    },
-    {
-        "hiragana": "でゅえでゅおでゅんでゅ",
-        "romaji": "dyu_e_dyu—o_dyu_n_dyu"
-    },
-    {
-        "hiragana": "とぅとぅてぃとたとてぃ",
-        "romaji": "tu_tu_ti_to_ta_to_ti"
-    },
-    {
-        "hiragana": "どぅどぅでぃどだどでぃ",
-        "romaji": "du_du_di_do_da_do_di"
-    },
-    {
-        "hiragana": "ととぅんたんとぅ",
-        "romaji": "to_tu_n_ta_n_tu"
-    },
-    {
-        "hiragana": "どどぅんだんどぅ",
-        "romaji": "do_du_n_da_n_du"
-    },
-    {
-        "hiragana": "ななになぬねな",
-        "romaji": "na_na_ni_na_nu_ne_na"
-    },
-    {
-        "hiragana": "にぇにぇにゅにょにぇにょにょ",
-        "romaji": "nye_nye_nyu_nyo_nye_nyo_nyo"
-    },
-    {
-        "hiragana": "にににゅにゃにぇににぇ",
-        "romaji": "ni_ni_nyu_nya_nye_ni_nye"
-    },
-    {
-        "hiragana": "ににぬなねにね",
-        "romaji": "ni_ni_nu_na_ne_ni_ne"
-    },
-    {
-        "hiragana": "ぬぬにのなのに",
-        "romaji": "nu_nu_ni_no_na_no_ni"
-    },
-    {
-        "hiragana": "にゃにゃににゃにゅにぇにゃ",
-        "romaji": "nya_nya_ni_nya_nyu_nye_nya"
-    },
-    {
-        "hiragana": "にゅにゅににょにゃにょに",
-        "romaji": "nyu_nyu_ni_nyo_nya_nyo_ni"
-    },
-    {
-        "hiragana": "にょにゅんにゃんにゅ",
-        "romaji": "nyo_nyu_n_nya_n_nyu"
-    },
-    {
-        "hiragana": "ねねぬのねのの",
-        "romaji": "ne_ne_nu_no_ne_no_no"
-    },
-    {
-        "hiragana": "のぬんなんぬ",
-        "romaji": "no_nu_n_na_n_nu"
-    },
-    {
-        "hiragana": "ははひはふへは",
-        "romaji": "ha_ha_hi_ha_fu_he_ha"
-    },
-    {
-        "hiragana": "ばばびばぶべば",
-        "romaji": "ba_ba_bi_ba_bu_be_ba"
-    },
-    {
-        "hiragana": "ぱぱぴぱぷぺぱ",
-        "romaji": "pa_pa_pi_pa_pu_pe_pa"
-    },
-    {
-        "hiragana": "ひぇひぇひゅひょひぇひょひょ",
-        "romaji": "hye_hye_hyu_hyo_hye_hyo_hyo"
-    },
-    {
-        "hiragana": "びぇびぇびゅびょびぇびょびょ",
-        "romaji": "bye_bye_byu_byo_bye_byo_byo"
-    },
-    {
-        "hiragana": "ぴぇぴぇぴゅぴょぴぇぴょぴょ",
-        "romaji": "pye_pye_pyu_pyo_pye_pyo_pyo"
-    },
-    {
-        "hiragana": "ひひひゅひゃひぇひひぇ",
-        "romaji": "hi_hi_hyu_hya_hye_hi_hye"
-    },
-    {
-        "hiragana": "びびびゅびゃびぇんびぇ",
-        "romaji": "bi_bi_byu_bya_bye_n_bye"
-    },
-    {
-        "hiragana": "ぴぴぴゅぴゃぴぇぴぴぇ",
-        "romaji": "pi_pi_pyu_pya_pye_pi_pye"
-    },
-    {
-        "hiragana": "ひひふはへひへ",
-        "romaji": "hi_hi_fu_ha_he_hi_he"
-    },
-    {
-        "hiragana": "びびぶばべびべ",
-        "romaji": "bi_bi_bu_ba_be_bi_be"
-    },
-    {
-        "hiragana": "ぴぴぷぱぺぴぺ",
-        "romaji": "pi_pi_pu_pa_pe_pi_pe"
-    },
-    {
-        "hiragana": "ひゃひゃひひゃひゅひぇひゃ",
-        "romaji": "hya_hya_hi_hya_hyu_hye_hya"
-    },
-    {
-        "hiragana": "びゃびゃびびゃびゅびぇびゃ",
-        "romaji": "bya_bya_bi_bya_byu_bye_bya"
-    },
-    {
-        "hiragana": "ぴゃぴゃぴぴゃぴゅぴぇぴゃ",
-        "romaji": "pya_pya_pi_pya_pyu_pye_pya"
-    },
-    {
-        "hiragana": "ひゅひゅひひょひゃひょひ",
-        "romaji": "hyu_hyu_hi_hyo_hya_hyo_hi"
-    },
-    {
-        "hiragana": "びゅびゅびびょびゃびょび",
-        "romaji": "byu_byu_bi_byo_bya_byo_bi"
-    },
-    {
-        "hiragana": "ぴゅぴゅぴぴょぴゃぴょぴ",
-        "romaji": "pyu_pyu_pi_pyo_pya_pyo_pi"
-    },
-    {
-        "hiragana": "ひょひゅんひゃんひゅ",
-        "romaji": "hyo_hyu_n_hya_n_hyu"
-    },
-    {
-        "hiragana": "びょびゅんびゃんびゅ",
-        "romaji": "byo_byu_n_bya_n_byu"
-    },
-    {
-        "hiragana": "ぴょぴゅんぴゃんぴゅ",
-        "romaji": "pyo_pyu_n_pya_n_pyu"
-    },
-    {
-        "hiragana": "ふぁふぁふぃふぁふふぇふぁ",
-        "romaji": "fa_fa_fi_fa_fu_fe_fa"
-    },
-    {
-        "hiragana": "ふぃふぃふふぁふぇふぃふぇ",
-        "romaji": "fi_fi_fu_fa_fe_fi_fe"
-    },
-    {
-        "hiragana": "ふぇふぇふふぉふぇふぉふぉ",
-        "romaji": "fe_fe_fu_fo_fe_fo_fo"
-    },
-    {
-        "hiragana": "ふぉんふぁんひぇんひょ",
-        "romaji": "fo_n_fa_n_hye_n_hyo"
-    },
-    {
-        "hiragana": "ふふひほはほひ",
-        "romaji": "fu_fu_hi_ho_ha_ho_hi"
-    },
-    {
-        "hiragana": "ぶぶびぼばぼび",
-        "romaji": "bu_bu_bi_bo_ba_bo_bi"
-    },
-    {
-        "hiragana": "ぷぷぴぽぱぽぴ",
-        "romaji": "pu_pu_pi_po_pa_po_pi"
-    },
-    {
-        "hiragana": "ふふふぃふぉふぁふぉふぃ",
-        "romaji": "fu_fu_fi_fo_fa_fo_fi"
-    },
-    {
-        "hiragana": "へへふほへほほ",
-        "romaji": "he_he_fu_ho_he_ho_ho"
-    },
-    {
-        "hiragana": "べべぶぼべぼぼ",
-        "romaji": "be_be_bu_bo_be_bo_bo"
-    },
-    {
-        "hiragana": "ぺぺぷぽぺぽぽ",
-        "romaji": "pe_pe_pu_po_pe_po_po"
-    },
-    {
-        "hiragana": "ほふんはんふ",
-        "romaji": "ho_fu_n_ha_n_fu"
-    },
-    {
-        "hiragana": "ぼぶんばんぶ",
-        "romaji": "bo_bu_n_ba_n_bu"
-    },
-    {
-        "hiragana": "ぽぷんぱんぷ",
-        "romaji": "po_pu_n_pa_n_pu"
-    },
-    {
-        "hiragana": "ままみまむめま",
-        "romaji": "ma_ma_mi_ma_mu_me_ma"
-    },
-    {
-        "hiragana": "みぇみぇみゅみょみぇみょみょ",
-        "romaji": "mye_mye_myu_myo_mye_myo_myo"
-    },
-    {
-        "hiragana": "みみみゅみゃみぇみみぇ",
-        "romaji": "mi_mi_myu_mya_mye_mi_mye"
-    },
-    {
-        "hiragana": "みみむまめみめ",
-        "romaji": "mi_mi_mu_ma_me_mi_me"
-    },
-    {
-        "hiragana": "みゃみゃみみゃみゅみぇみゃ",
-        "romaji": "mya_mya_mi_mya_myu_mye_mya"
-    },
-    {
-        "hiragana": "みゅみゅみみょみゃみょみ",
-        "romaji": "myu_myu_mi_myo_mya_myo_mi"
-    },
-    {
-        "hiragana": "みょみゅんみゃんみゅ",
-        "romaji": "myo_myu_n_mya_n_myu"
-    },
-    {
-        "hiragana": "むむみもまもみ",
-        "romaji": "mu_mu_mi_mo_ma_mo_mi"
-    },
-    {
-        "hiragana": "めめむもめもも",
-        "romaji": "me_me_mu—mo_me_mo_mo"
-    },
-    {
-        "hiragana": "もむんまんむ",
-        "romaji": "mo_mu_n_ma_n_mu"
-    },
-    {
-        "hiragana": "ややいやゆいぇや",
-        "romaji": "ya_ya_i_ya_yu_ye_ya"
-    },
-    {
-        "hiragana": "ゆゆいよやよい",
-        "romaji": "yu_yu_i_yo_ya_yo_i"
-    },
-    {
-        "hiragana": "よゆんやんゆ",
-        "romaji": "yo_yu_n_ya_n_yu"
-    },
-    {
-        "hiragana": "ららりらるれら",
-        "romaji": "ra_ra_ri_ra_ru_re_ra"
-    },
-    {
-        "hiragana": "りぇりぇりゅりょりぇりょりょ",
-        "romaji": "rye_rye_ryu_ryo_rye_ryo_ryo"
-    },
-    {
-        "hiragana": "りゃりゃりりゃりゅりぇりゃ",
-        "romaji": "rya_rya_ri_rya_ryu_rye_rya"
-    },
-    {
-        "hiragana": "りゅりゅりりょりゃりょり",
-        "romaji": "ryu_ryu_ri_ryo_rya_ryo_ri"
-    },
-    {
-        "hiragana": "りょりゅんりゃんりゅ",
-        "romaji": "ryo_ryu_n_rya_n_ryu"
-    },
-    {
-        "hiragana": "りりりゅりゃりぇりりぇ",
-        "romaji": "ri_ri_ryu_rya_rye_ri_rye"
-    },
-    {
-        "hiragana": "りりるられりれ",
-        "romaji": "ri_ri_ru_ra_re_ri_re"
-    },
-    {
-        "hiragana": "るるりろらろり",
-        "romaji": "ru_ru_ri_ro_ra_ro_ri"
-    },
-    {
-        "hiragana": "れれるろれろろ",
-        "romaji": "re_re_ru_ro_re_ro_ro"
-    },
-    {
-        "hiragana": "ろるんらんる",
-        "romaji": "ro_ru_n_ra_n_ru"
-    },
-    {
-        "hiragana": "わわうぃわううぇわ",
-        "romaji": "wa_wa_wi_wa_u_we_wa"
-    },
-    {
-        "hiragana": "んいんいぇんよ",
-        "romaji": "n_i_n_ye_n_yo"
-    },
-    {
-        "hiragana": "んいんえんおん",
-        "romaji": "n_i_n_e_n_o_n"
-    },
-    {
-        "hiragana": "んうぃんうぇんうぉ",
-        "romaji": "n_wi_n_we_n_wo"
-    },
-    {
-        "hiragana": "んヴぃんヴぇんヴぉ",
-        "romaji": "n_vi_n_ve_n_vo"
-    },
-    {
-        "hiragana": "んきぇんきょ",
-        "romaji": "n_kye_n_kyo"
-    },
-    {
-        "hiragana": "んぎぇんぎょ",
-        "romaji": "n_gye_n_gyo"
-    },
-    {
-        "hiragana": "んきんけんこ",
-        "romaji": "n_ki_n_ke_n_ko"
-    },
-    {
-        "hiragana": "んぎんげんご",
-        "romaji": "n_gi_n_ge_n_go"
-    },
-    {
-        "hiragana": "んしぇんしょんしびぇ",
-        "romaji": "n_she_n_sho_n_shi_bye"
-    },
-    {
-        "hiragana": "んじんじぇんじょ",
-        "romaji": "n_ji_n_je_n_jo"
-    },
-    {
-        "hiragana": "んすぃんせんそ",
-        "romaji": "n_si_n_se_n_so"
-    },
-    {
-        "hiragana": "んずぃんぜんぞ",
-        "romaji": "n_zi_n_ze_n_zo"
-    },
-    {
-        "hiragana": "んちぇんちょんちぴぇ",
-        "romaji": "n_che_n_cho_n_chi_bye"
-    },
-    {
-        "hiragana": "んつぃんつぇんつぉ",
-        "romaji": "n_tsi_n_tse_n_tso"
-    },
-    {
-        "hiragana": "んてぃんてんと",
-        "romaji": "n_ti_n_te_n_to"
-    },
-    {
-        "hiragana": "んでぃんでんど",
-        "romaji": "n_di_n_de_n_do"
-    },
-    {
-        "hiragana": "んにぇんにょんりぇ",
-        "romaji": "n_nye_n_nyo_n_rye"
-    },
-    {
-        "hiragana": "んにんねんの",
-        "romaji": "n_ni_n_ne_n_no"
-    },
-    {
-        "hiragana": "んひんへんほ",
-        "romaji": "n_hi_n_he_n_ho"
-    },
-    {
-        "hiragana": "んびんべんぼ",
-        "romaji": "n_bi_n_be_n_bo"
-    },
-    {
-        "hiragana": "んぴんぺんぽ",
-        "romaji": "n_pi_n_pe_n_po"
-    },
-    {
-        "hiragana": "んふぃんふぇんふぉ",
-        "romaji": "n_fi_n_fe_n_fo"
-    },
-    {
-        "hiragana": "んみぇんみょんりょ",
-        "romaji": "n_mye_n_myo_n_ryo"
-    },
-    {
-        "hiragana": "んみんめんも",
-        "romaji": "n_mi_n_me_n_mo"
-    },
-    {
-        "hiragana": "んりんれんろ",
-        "romaji": "n_ri_n_re_n_ro"
-    },
-    {
-        "hiragana": "んひんひぇんひょ",
-        "romaji": "n_hi_n_hye_n_hyo"
-    },
-    {
-        "hiragana": "んびんびぇんびょ",
-        "romaji": "n_bi_n_bye_n_byo"
-    },
-    {
-        "hiragana": "んぴんぴぇんぴょ",
-        "romaji": "n_pi_n_pye_n_pyo"
-    },
-    {
-        "hiragana": "ヴぁヴぁヴぃヴぁヴヴぇヴぁ",
-        "romaji": "va_va_vi_va_vu_ve_va"
-    },
-    {
-        "hiragana": "ヴぃヴぃヴヴぁヴぇヴぃヴぇ",
-        "romaji": "vi_vi_vu_va_ve_vi_ve"
-    },
-    {
-        "hiragana": "ヴヴヴぃヴぉヴぁヴぉヴぃ",
-        "romaji": "vu_vu_vi_vo_va_vo_vi"
-    },
-    {
-        "hiragana": "ヴぇヴぇヴヴぉヴぇヴぉヴぉ",
-        "romaji": "ve_ve_vu_vo_ve_vo_vo"
-    },
-    {
-        "hiragana": "ヴぉヴんヴぁんヴ",
-        "romaji": "vo_vu_n_va_n_vu"
-    }
+  ["ああいあうえあ", "a_a_i_a_u_e_a"], 
+  ["いいうあえいえ", "i_i_u_a_e_i_e"], 
+  ["いいゆやいぇいいぇ", "i_i_yu_ya_ye_i_ye"], 
+  ["いぇいぇゆよいぇよよ", "ye_ye_yu_yo_ye_yo_yo"], 
+  ["うぃうぃうわうぇうぃうぇ", "wi_wi_u_wa_we_wi_we"], 
+  ["うういおあおい", "u_u_i_o_a_o_i"], 
+  ["うううぃうぉわうぉうぃ", "u_u_wi_wo_wa_wo_wi"], 
+  ["うぇうぇううぉうぇうぉうぉ", "we_we_u_wo_we_wo_wo"], 
+  ["うぉうんわんう", "wo_u_n_wa_n_u"], 
+  ["ええうおえおお", "e_e_u_o_e_o_o"], 
+  ["おうんあんんう", "o_u_n_a_n_n_u"], 
+  ["かかきかくけか", "ka_ka_ki_ka_ku_ke_ka"], 
+  ["ががぎがぐげが", "ga_ga_gi_ga_gu_ge_ga"], 
+  ["きぇきぇきゅきょきぇきょきょ", "kye_kye_kyu_kyo_kye_kyo_kyo"], 
+  ["ぎぇぎぇぎゅぎょぎぇぎょぎょ", "gye_gye_gyu_gyo_gye_gyo_gyo"], 
+  ["きききゅきゃきぇききぇ", "ki_ki_kyu_kya_kye_ki_kye"], 
+  ["ぎぎぎゅぎゃぎぇぎぎぇ", "gi_gi_gyu_gya_gye_gi_gye"], 
+  ["ききくかけきけ", "ki_ki_ku_ka_ke_ki_ke"], 
+  ["ぎぎぐがげぎげ", "gi_gi_gu_ga_ge_gi_ge"], 
+  ["きゃきゃききゃきゅきぇきゃ", "kya_kya_ki_kya_kyu_kye_kya"], 
+  ["ぎゃぎゃぎぎゃぎゅぎぇぎゃ", "gya_gya_gi_gya_gyu_gye_gya"], 
+  ["きゅきゅききょきゃきょき", "kyu_kyu_ki_kyo_kya_kyo_ki"], 
+  ["ぎゅぎゅぎぎょぎゃぎょぎ", "gyu_gyu_gi_gyo_gya_gyo_gi"], 
+  ["きょきゅんきゃんきゅ", "kyo_kyu_n_kya_n_kyu"], 
+  ["ぎょぎゅんぎゃんぎゅ", "gyo_gyu_n_gya_n_gyu"], 
+  ["くくきこかこき", "ku_ku_ki_ko_ka_ko_ki"], 
+  ["ぐぐぎごがごぎ", "gu_gu_gi_go_ga_go_gi"], 
+  ["けけくこけここ", "ke_ke_ku_ko_ke_ko_ko"], 
+  ["げげぐごげごご", "ge_ge_gu_go_ge_go_go"], 
+  ["こくんかんく", "ko_ku_n_ka_n_ku"], 
+  ["ごぐんがんぐ", "go_gu_n_ga_n_gu"], 
+  ["ささすぃさすせさ", "sa_sa_si_sa_su_se_sa"], 
+  ["ざざずぃざずぜざ", "za_za_zi_za_zu_ze_za"], 
+  ["しぇしぇしゅしょしぇしょしょ", "she_she_shu_sho_she_sho_sho"], 
+  ["じぇじぇじゅじょじぇじょじょ", "je_je_ju_jo_je_jo_jo"], 
+  ["しししゅしゃしぇししぇ", "shi_shi_shu_sha_she_shi_she"], 
+  ["じじじゅじゃじぇじじぇ", "ji_ji_ju_ja_je_ji_je"], 
+  ["しゃしゃししゃしゅしぇしゃ", "sha_sha_shi_sha_shu_she_sha"], 
+  ["じゃじゃじじゃじゅじぇじゃ", "ja_ja_ji_ja_ju_je_ja"], 
+  ["しゅしゅししょしゃしょし", "shu_shu_shi_sho_sha_sho_shi"], 
+  ["じゅじゅじじょじゃじょじ", "ju_ju_ji_jo_ja_jo_ji"], 
+  ["しょしゅんしゃんしゅ", "sho_shu_n_sha_n_shu"], 
+  ["じょじゅんじゃんじゅ", "jo_ju_n_ja_n_ju"], 
+  ["すぃすぃすさせすぃせ", "si_si_su_sa_se_si_se"], 
+  ["ずぃずぃずざぜずぃぜ", "zi_zi_zu_za_ze_zi_ze"], 
+  ["すすすぃそさそすぃ", "su_su_si_so_sa_so_si"], 
+  ["ずずずぃぞざぞずぃ", "zu_zu_zi_zo_za_zo_zi"], 
+  ["せせすそせそそ", "se_se_su_so_se_so_so"], 
+  ["ぜぜずぞぜぞぞ", "ze_ze_zu_zo_ze_zo_zo"], 
+  ["そすんさんす", "so_su_n_sa_n_su"], 
+  ["ぞずんざんず", "zo_zu_n_za_n_zu"], 
+  ["たたてぃたとぅてた", "ta_ta_ti_ta_tu_te_ta"], 
+  ["だだでぃだどぅでだ", "da_da_di_da_du_de_da"], 
+  ["ちぇちぇちゅちょちぇちょちょ", "che_che_chu_cho_che_cho_cho"], 
+  ["ちちちゅちゃちぇちちぇ", "chi_chi_chu_cha_che_chi_che"], 
+  ["ちゃちゃちちゃちゅちぇちゃ", "cha_cha_chi_cha_chu_che_cha"], 
+  ["ちゅちゅちちょちゃちょち", "chu_chu_chi_cho_cha_cho_chi"], 
+  ["ちょちゅんちゃんちゅ", "cho_chu_n_cha_n_chu"], 
+  ["つぁつぁつぃつぁつつぇつぁ", "tsa_tsa_tsi_tsa_tsu_tse_tsa"], 
+  ["つぃつぃつつぁつぇつぃつぇ", "tsi_tsi_tsu_tsa_tse_tsi_tse"], 
+  ["つぇつぇつつぉつぇつぉつぉ", "tse_tse_tsu_tso_tse_tso_tso"], 
+  ["つぉつんつぁんつ", "tso_tsu_n_tsa_n_tsu"], 
+  ["つつつぃつぉつぁつぉつぃ", "tsu_tsu_tsi_tso_tsa_tso_tsi"], 
+  ["てぃてぃとぅたててぃて", "ti_ti_tu_ta_te_ti_te"], 
+  ["でぃでぃどぅだででぃで", "di_di_du_da_de_di_de"], 
+  ["てぃてゅあてゅてゅんびょ", "ti_tyu_a_tyu_tyu_n_byo"], 
+  ["でぃでゅあでゅでゅんぴょ", "di_dyu_a_dyu_dyu_n_byo"], 
+  ["ててとぅとてとと", "te_te_tu_to_te_to_to"], 
+  ["ででどぅどでどど", "de_de_du_do_de_do_do"], 
+  ["てゅえてゅおてゅんてゅ", "tyu_e_tyu_a_tyu_n_tyu"], 
+  ["でゅえでゅおでゅんでゅ", "dyu_e_dyu—o_dyu_n_dyu"], 
+  ["とぅとぅてぃとたとてぃ", "tu_tu_ti_to_ta_to_ti"], 
+  ["どぅどぅでぃどだどでぃ", "du_du_di_do_da_do_di"], 
+  ["ととぅんたんとぅ", "to_tu_n_ta_n_tu"], 
+  ["どどぅんだんどぅ", "do_du_n_da_n_du"], 
+  ["ななになぬねな", "na_na_ni_na_nu_ne_na"], 
+  ["にぇにぇにゅにょにぇにょにょ", "nye_nye_nyu_nyo_nye_nyo_nyo"], 
+  ["にににゅにゃにぇににぇ", "ni_ni_nyu_nya_nye_ni_nye"], 
+  ["ににぬなねにね", "ni_ni_nu_na_ne_ni_ne"], 
+  ["ぬぬにのなのに", "nu_nu_ni_no_na_no_ni"], 
+  ["にゃにゃににゃにゅにぇにゃ", "nya_nya_ni_nya_nyu_nye_nya"], 
+  ["にゅにゅににょにゃにょに", "nyu_nyu_ni_nyo_nya_nyo_ni"], 
+  ["にょにゅんにゃんにゅ", "nyo_nyu_n_nya_n_nyu"], 
+  ["ねねぬのねのの", "ne_ne_nu_no_ne_no_no"], 
+  ["のぬんなんぬ", "no_nu_n_na_n_nu"], 
+  ["ははひはふへは", "ha_ha_hi_ha_fu_he_ha"], 
+  ["ばばびばぶべば", "ba_ba_bi_ba_bu_be_ba"], 
+  ["ぱぱぴぱぷぺぱ", "pa_pa_pi_pa_pu_pe_pa"], 
+  ["ひぇひぇひゅひょひぇひょひょ", "hye_hye_hyu_hyo_hye_hyo_hyo"], 
+  ["びぇびぇびゅびょびぇびょびょ", "bye_bye_byu_byo_bye_byo_byo"], 
+  ["ぴぇぴぇぴゅぴょぴぇぴょぴょ", "pye_pye_pyu_pyo_pye_pyo_pyo"], 
+  ["ひひひゅひゃひぇひひぇ", "hi_hi_hyu_hya_hye_hi_hye"], 
+  ["びびびゅびゃびぇんびぇ", "bi_bi_byu_bya_bye_n_bye"], 
+  ["ぴぴぴゅぴゃぴぇぴぴぇ", "pi_pi_pyu_pya_pye_pi_pye"], 
+  ["ひひふはへひへ", "hi_hi_fu_ha_he_hi_he"], 
+  ["びびぶばべびべ", "bi_bi_bu_ba_be_bi_be"], 
+  ["ぴぴぷぱぺぴぺ", "pi_pi_pu_pa_pe_pi_pe"], 
+  ["ひゃひゃひひゃひゅひぇひゃ", "hya_hya_hi_hya_hyu_hye_hya"], 
+  ["びゃびゃびびゃびゅびぇびゃ", "bya_bya_bi_bya_byu_bye_bya"], 
+  ["ぴゃぴゃぴぴゃぴゅぴぇぴゃ", "pya_pya_pi_pya_pyu_pye_pya"], 
+  ["ひゅひゅひひょひゃひょひ", "hyu_hyu_hi_hyo_hya_hyo_hi"], 
+  ["びゅびゅびびょびゃびょび", "byu_byu_bi_byo_bya_byo_bi"], 
+  ["ぴゅぴゅぴぴょぴゃぴょぴ", "pyu_pyu_pi_pyo_pya_pyo_pi"], 
+  ["ひょひゅんひゃんひゅ", "hyo_hyu_n_hya_n_hyu"], 
+  ["びょびゅんびゃんびゅ", "byo_byu_n_bya_n_byu"], 
+  ["ぴょぴゅんぴゃんぴゅ", "pyo_pyu_n_pya_n_pyu"], 
+  ["ふぁふぁふぃふぁふふぇふぁ", "fa_fa_fi_fa_fu_fe_fa"], 
+  ["ふぃふぃふふぁふぇふぃふぇ", "fi_fi_fu_fa_fe_fi_fe"], 
+  ["ふぇふぇふふぉふぇふぉふぉ", "fe_fe_fu_fo_fe_fo_fo"], 
+  ["ふぉんふぁんひぇんひょ", "fo_n_fa_n_hye_n_hyo"], 
+  ["ふふひほはほひ", "fu_fu_hi_ho_ha_ho_hi"], 
+  ["ぶぶびぼばぼび", "bu_bu_bi_bo_ba_bo_bi"], 
+  ["ぷぷぴぽぱぽぴ", "pu_pu_pi_po_pa_po_pi"], 
+  ["ふふふぃふぉふぁふぉふぃ", "fu_fu_fi_fo_fa_fo_fi"], 
+  ["へへふほへほほ", "he_he_fu_ho_he_ho_ho"], 
+  ["べべぶぼべぼぼ", "be_be_bu_bo_be_bo_bo"], 
+  ["ぺぺぷぽぺぽぽ", "pe_pe_pu_po_pe_po_po"], 
+  ["ほふんはんふ", "ho_fu_n_ha_n_fu"], 
+  ["ぼぶんばんぶ", "bo_bu_n_ba_n_bu"], 
+  ["ぽぷんぱんぷ", "po_pu_n_pa_n_pu"], 
+  ["ままみまむめま", "ma_ma_mi_ma_mu_me_ma"], 
+  ["みぇみぇみゅみょみぇみょみょ", "mye_mye_myu_myo_mye_myo_myo"], 
+  ["みみみゅみゃみぇみみぇ", "mi_mi_myu_mya_mye_mi_mye"], 
+  ["みみむまめみめ", "mi_mi_mu_ma_me_mi_me"], 
+  ["みゃみゃみみゃみゅみぇみゃ", "mya_mya_mi_mya_myu_mye_mya"], 
+  ["みゅみゅみみょみゃみょみ", "myu_myu_mi_myo_mya_myo_mi"], 
+  ["みょみゅんみゃんみゅ", "myo_myu_n_mya_n_myu"], 
+  ["むむみもまもみ", "mu_mu_mi_mo_ma_mo_mi"], 
+  ["めめむもめもも", "me_me_mu—mo_me_mo_mo"], 
+  ["もむんまんむ", "mo_mu_n_ma_n_mu"], 
+  ["ややいやゆいぇや", "ya_ya_i_ya_yu_ye_ya"], 
+  ["ゆゆいよやよい", "yu_yu_i_yo_ya_yo_i"], 
+  ["よゆんやんゆ", "yo_yu_n_ya_n_yu"], 
+  ["ららりらるれら", "ra_ra_ri_ra_ru_re_ra"], 
+  ["りぇりぇりゅりょりぇりょりょ", "rye_rye_ryu_ryo_rye_ryo_ryo"], 
+  ["りゃりゃりりゃりゅりぇりゃ", "rya_rya_ri_rya_ryu_rye_rya"], 
+  ["りゅりゅりりょりゃりょり", "ryu_ryu_ri_ryo_rya_ryo_ri"], 
+  ["りょりゅんりゃんりゅ", "ryo_ryu_n_rya_n_ryu"], 
+  ["りりりゅりゃりぇりりぇ", "ri_ri_ryu_rya_rye_ri_rye"], 
+  ["りりるられりれ", "ri_ri_ru_ra_re_ri_re"], 
+  ["るるりろらろり", "ru_ru_ri_ro_ra_ro_ri"], 
+  ["れれるろれろろ", "re_re_ru_ro_re_ro_ro"], 
+  ["ろるんらんる", "ro_ru_n_ra_n_ru"], 
+  ["わわうぃわううぇわ", "wa_wa_wi_wa_u_we_wa"], 
+  ["んいんいぇんよ", "n_i_n_ye_n_yo"], 
+  ["んいんえんおん", "n_i_n_e_n_o_n"], 
+  ["んうぃんうぇんうぉ", "n_wi_n_we_n_wo"], 
+  ["んヴぃんヴぇんヴぉ", "n_vi_n_ve_n_vo"], 
+  ["んきぇんきょ", "n_kye_n_kyo"], 
+  ["んぎぇんぎょ", "n_gye_n_gyo"], 
+  ["んきんけんこ", "n_ki_n_ke_n_ko"], 
+  ["んぎんげんご", "n_gi_n_ge_n_go"], 
+  ["んしぇんしょんしびぇ", "n_she_n_sho_n_shi_bye"], 
+  ["んじんじぇんじょ", "n_ji_n_je_n_jo"], 
+  ["んすぃんせんそ", "n_si_n_se_n_so"], 
+  ["んずぃんぜんぞ", "n_zi_n_ze_n_zo"], 
+  ["んちぇんちょんちぴぇ", "n_che_n_cho_n_chi_bye"], 
+  ["んつぃんつぇんつぉ", "n_tsi_n_tse_n_tso"], 
+  ["んてぃんてんと", "n_ti_n_te_n_to"], 
+  ["んでぃんでんど", "n_di_n_de_n_do"], 
+  ["んにぇんにょんりぇ", "n_nye_n_nyo_n_rye"], 
+  ["んにんねんの", "n_ni_n_ne_n_no"], 
+  ["んひんへんほ", "n_hi_n_he_n_ho"], 
+  ["んびんべんぼ", "n_bi_n_be_n_bo"], 
+  ["んぴんぺんぽ", "n_pi_n_pe_n_po"], 
+  ["んふぃんふぇんふぉ", "n_fi_n_fe_n_fo"], 
+  ["んみぇんみょんりょ", "n_mye_n_myo_n_ryo"], 
+  ["んみんめんも", "n_mi_n_me_n_mo"], 
+  ["んりんれんろ", "n_ri_n_re_n_ro"], 
+  ["んひんひぇんひょ", "n_hi_n_hye_n_hyo"], 
+  ["んびんびぇんびょ", "n_bi_n_bye_n_byo"], 
+  ["んぴんぴぇんぴょ", "n_pi_n_pye_n_pyo"], 
+  ["ヴぁヴぁヴぃヴぁヴヴぇヴぁ", "va_va_vi_va_vu_ve_va"], 
+  ["ヴぃヴぃヴヴぁヴぇヴぃヴぇ", "vi_vi_vu_va_ve_vi_ve"], 
+  ["ヴヴヴぃヴぉヴぁヴぉヴぃ", "vu_vu_vi_vo_va_vo_vi"], 
+  ["ヴぇヴぇヴヴぉヴぇヴぉヴぉ", "ve_ve_vu_vo_ve_vo_vo"], 
+  ["ヴぉヴんヴぁんヴ", "vo_vu_n_va_n_vu"]
 ]

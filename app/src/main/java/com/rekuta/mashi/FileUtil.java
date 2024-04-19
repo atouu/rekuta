@@ -178,7 +178,7 @@ public class FileUtil {
         }
     }
 
-    public static ArrayList<String> listFileNames(String path) {
+    public static ArrayList<String> getFileNames(String path) {
         ArrayList<String> fileNames = new ArrayList<>();
         File dir = new File(path);
         if (!dir.exists() || dir.isFile()) return fileNames;

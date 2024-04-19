@@ -5,23 +5,19 @@
      xmlns:tools="http://schemas.android.com/tools"
      android:layout_height="match_parent"
      android:layout_width="match_parent"
+     android:padding="8dp"
      android:orientation="vertical">
 
     <LinearLayout
          android:layout_height="wrap_content"
          android:layout_width="match_parent"
          android:gravity="center_horizontal|center_vertical"
-         android:paddingRight="8dp"
-         android:orientation="horizontal"
-         android:paddingBottom="4dp"
-         android:paddingLeft="8dp"
-         android:paddingTop="4dp">
+         android:orientation="horizontal">
 
         <EditText
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
              android:hint="@string/enter_voicebank"
-             android:padding="8dp"
              android:textSize="12sp"
              android:singleLine="true"
              android:layout_weight="1"
@@ -30,7 +26,6 @@
         <Button
              android:layout_height="wrap_content"
              android:layout_width="wrap_content"
-             android:padding="8dp"
              android:textSize="12sp"
              android:id="@+id/set"
              android:text="@string/set" />
@@ -41,11 +36,8 @@
          android:layout_height="wrap_content"
          android:layout_width="match_parent"
          android:gravity="center_vertical"
-         android:paddingRight="14dp"
          android:orientation="horizontal"
-         android:paddingBottom="4dp"
-         android:paddingLeft="12dp"
-         android:paddingTop="4dp">
+         android:paddingHorizontal="4dp">
 
         <TextView
              android:layout_height="wrap_content"
@@ -65,11 +57,13 @@
              android:layout_height="wrap_content"
              android:layout_width="85dp"
              android:background="@drawable/spinner"
-             android:backgroundTint="?android:attr/colorControlNormal"
+             android:backgroundTint="?android:colorControlNormal"
              android:spinnerMode="dropdown"
              android:dropDownWidth="85dp"
-             android:foreground="?android:attr/selectableItemBackgroundBorderless"
-             android:id="@+id/spinner1" />
+             android:foreground="?android:selectableItemBackgroundBorderless"
+             android:id="@+id/spinner1">
+
+        </Spinner>
 
     </LinearLayout>
 
@@ -90,23 +84,16 @@
             <TextView
                  android:layout_height="wrap_content"
                  android:layout_width="wrap_content"
-                 android:paddingRight="8dp"
-                 android:paddingBottom="4dp"
+                 android:layout_marginBottom="8dp"
                  android:textSize="20sp"
-                 android:paddingLeft="8dp"
                  android:id="@+id/textview4"
-                 android:paddingTop="8dp"
                  android:text="@string/x_x" />
 
             <TextView
                  android:layout_height="wrap_content"
                  android:layout_width="wrap_content"
-                 android:paddingRight="8dp"
-                 android:paddingBottom="8dp"
                  android:textSize="14sp"
-                 android:paddingLeft="8dp"
                  android:id="@+id/textview2"
-                 android:paddingTop="4dp"
                  android:text="@string/no_voicebank" />
 
         </LinearLayout>
@@ -114,109 +101,115 @@
         <ListView
              android:layout_height="match_parent"
              android:layout_width="match_parent"
-             android:padding="8dp"
              android:choiceMode="none"
+             android:isScrollContainer="false"
              android:layout_weight="1"
-             android:id="@+id/listview1" />
+             android:id="@+id/listview1">
+
+        </ListView>
 
     </LinearLayout>
 
     <LinearLayout
          android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:gravity="center">
+         android:layout_width="wrap_content"
+         android:orientation="vertical">
 
-        <TextView
+        <FrameLayout
              android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:textSize="12sp"
-             android:id="@+id/textview5" />
+             android:layout_width="match_parent"
+             android:gravity="center"
+             android:id="@+id/toolbar_top">
 
-    </LinearLayout>
+            <TextView
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="12sp"
+                 android:layout_gravity="center"
+                 android:id="@+id/textview5" />
 
-    <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:paddingRight="8dp"
-         android:orientation="horizontal"
-         android:paddingBottom="4dp"
-         android:paddingLeft="8dp"
-         android:paddingTop="8dp">
+            <ImageButton
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:scaleType="fitCenter"
+                 android:src="@drawable/ic_add_comment"
+                 android:background="?android:selectableItemBackground"
+                 android:padding="4dp"
+                 android:layout_gravity="right|center_vertical"
+                 android:id="@+id/add_comment" />
 
-        <Button
+        </FrameLayout>
+
+        <LinearLayout
              android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:padding="8dp"
-             android:textSize="12sp"
-             android:layout_weight="1"
-             android:id="@+id/record"
-             android:text="@string/record" />
+             android:layout_width="match_parent"
+             android:orientation="horizontal">
 
-        <Button
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="12sp"
+                 android:layout_weight="1"
+                 android:id="@+id/record"
+                 android:text="@string/record" />
+
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="12sp"
+                 android:layout_weight="1"
+                 android:id="@+id/stop"
+                 android:text="@string/stop" />
+
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="12sp"
+                 android:layout_weight="1"
+                 android:id="@+id/play"
+                 android:text="@string/play" />
+
+        </LinearLayout>
+
+        <LinearLayout
              android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:padding="8dp"
-             android:textSize="12sp"
-             android:layout_weight="1"
-             android:id="@+id/stop"
-             android:text="@string/stop" />
+             android:layout_width="match_parent"
+             android:orientation="horizontal">
 
-        <Button
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:padding="8dp"
-             android:textSize="12sp"
-             android:layout_weight="1"
-             android:id="@+id/play"
-             android:text="@string/play" />
+            <ToggleButton
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textOn="@string/bgm_on"
+                 android:textSize="12sp"
+                 android:textOff="@string/bgm_off"
+                 android:layout_weight="1"
+                 android:id="@+id/bgm" />
 
-    </LinearLayout>
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="12sp"
+                 android:layout_weight="1"
+                 android:id="@+id/del"
+                 android:text="@string/delete" />
 
-    <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:paddingRight="8dp"
-         android:orientation="horizontal"
-         android:paddingBottom="8dp"
-         android:paddingLeft="8dp"
-         android:paddingTop="4dp">
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="12sp"
+                 android:layout_weight="1"
+                 android:id="@+id/prev"
+                 android:text="@string/previous" />
 
-        <ToggleButton
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:textOn="@string/bgm_on"
-             android:padding="8dp"
-             android:textSize="12sp"
-             android:textOff="@string/bgm_off"
-             android:layout_weight="1"
-             android:id="@+id/bgm" />
+            <Button
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="12sp"
+                 android:layout_weight="1"
+                 android:id="@+id/next"
+                 android:text="@string/next" />
 
-        <Button
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:padding="8dp"
-             android:textSize="12sp"
-             android:layout_weight="1"
-             android:id="@+id/del"
-             android:text="@string/delete" />
-
-        <Button
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:padding="8dp"
-             android:textSize="12sp"
-             android:layout_weight="1"
-             android:id="@+id/prev"
-             android:text="@string/previous" />
-
-        <Button
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:padding="8dp"
-             android:textSize="12sp"
-             android:layout_weight="1"
-             android:id="@+id/next"
-             android:text="@string/next" />
+        </LinearLayout>
 
     </LinearLayout>
 

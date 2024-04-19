@@ -33,6 +33,7 @@
     <string name="delete">Delete</string>
     <string name="previous">Previous</string>
     <string name="next">Next</string>
+    <string name="open_comment_file">Open reclist comment file.</string>
     <string name="welcome_to_rekuta">Welcome to Rekuta!</string>
     <string name="please_grant_permission">Please Grant Required Permissions</string>
     <string name="sure">Sure!</string>

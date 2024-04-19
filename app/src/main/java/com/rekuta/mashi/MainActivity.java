@@ -15,30 +15,33 @@ import com.rekuta.mashi.databinding.ActivityMainBinding;
 import com.rekuta.mashi.databinding.SampleListItemBinding;
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MainActivity extends Activity {
     
-    private ActivityMainBinding binding;
+    private static int HIRAGANA = 0;
+    private static int ROMAJI = 1;
     
     private int currentRecPos = 0;
     private int recordStart = 0;
     private int recordEnd = 0;
+    private int saveAs = 0;
     private boolean withBGM = false;
     private boolean customBgm = false;
     private boolean useKana = false;
     private String customBgmFile = "";
     private String currentRecFile = "";
     private String voicebankDir = "";
-    private String saveAs = "";
     private String currentReclist = "";
     private String rekutaDir = "";
     
-    private ArrayList<HashMap<String, String>> sampleList;
+    private ArrayList<String[]> sampleList;
     
     private WavRecorder recorder;
     private MediaPlayer playBGM;
     private SharedPreferences settings;
     private BaseAdapter sampleListAdapater;
+    private ActivityMainBinding binding;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,13 +184,23 @@ public class MainActivity extends Activity {
                 }
             }
         });
+        
+        binding.addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.showMessage(getApplicationContext(), R.string.open_comment_file);
+                Intent pickFile = new Intent(Intent.ACTION_GET_CONTENT);
+                pickFile.setType("text/plain");
+                startActivityForResult(pickFile, 2);
+            }
+        });
     }
     
     @Override
     protected void onResume() {
         super.onResume();
         useKana = settings.getBoolean("useKana", false);
-        saveAs = (useKana || currentReclist.equals("Custom")) ? "hiragana" : "romaji";
+        saveAs = (useKana || currentReclist.equals("Custom")) ? HIRAGANA : ROMAJI;
         customBgm = settings.getBoolean("customBGM", false);
         customBgmFile = settings.getString("customBGMFile", "None");
         recordStart = Integer.parseInt(settings.getString("recordStart", "4200"));
@@ -220,28 +233,36 @@ public class MainActivity extends Activity {
                     recreate();
                 }
                 break;
+            case 2:
+                try {
+                    InputStream inputstream1 = getContentResolver().openInputStream(data.getData());
+                    addComments(Utils.copyFromInputStream(inputstream1, "Shift_JIS"));
+                } catch (FileNotFoundException e) {
+                    
+                }
+                break;
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, R.string.settings);
-        menu.add(0, 1, 0, R.string.about);
-        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
     }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case (0):
+            case R.id.settings:
                 Intent i = new Intent(this, SettingsActivity.class);
                 startActivityForResult(i, 1);
-                break;
-            case (1):
+                return true;
+            case R.id.about:
                 showAbout();
-                break;
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
     
     @Override
@@ -262,12 +283,13 @@ public class MainActivity extends Activity {
     }
     
     public void updateStrings(int pos) {
-        currentRecFile = String.format("%s/%s.wav", voicebankDir, sampleList.get(pos).get(saveAs));
-        binding.textview4.setText(sampleList.get(pos).get("hiragana"));
-        if (currentReclist.equals("Custom")) {
+        currentRecFile = String.format("%s/%s.wav", voicebankDir, sampleList.get(pos)[saveAs]);
+        binding.textview4.setText(sampleList.get(pos)[HIRAGANA]);
+        if (sampleList.get(pos)[ROMAJI] == null) {
             binding.textview2.setVisibility(View.GONE);
         } else {
-            binding.textview2.setText(sampleList.get(pos).get("romaji"));
+            binding.textview2.setVisibility(View.VISIBLE);
+            binding.textview2.setText(sampleList.get(pos)[ROMAJI]);
         }
     }
     
@@ -281,7 +303,7 @@ public class MainActivity extends Activity {
     
     public void enableAll(boolean enable) {
         binding.listview1.setVisibility(enable ? View.VISIBLE : View.GONE);
-        binding.textview5.setVisibility(enable ? View.VISIBLE : View.GONE);
+        binding.toolbarTop.setVisibility(enable ? View.VISIBLE : View.GONE);
         binding.bgm.setEnabled(enable);
         binding.del.setEnabled(enable);
         binding.next.setEnabled(enable);
@@ -305,27 +327,31 @@ public class MainActivity extends Activity {
             InputStream inputstream1;
             
             if (uri != null && currentReclist.equals("Custom")) {
-                saveAs = "hiragana";
                 inputstream1 = getContentResolver().openInputStream(uri);
                 String[] listSamps = Utils.copyFromInputStream(inputstream1, "Shift_JIS").split("\\s+");
                 sampleList = new ArrayList<>();
                 for (String str : listSamps) {
-                    HashMap<String,String> hashMap = new HashMap<>();
-                    hashMap.put("hiragana", str);
-                    sampleList.add(hashMap);
+                    String[] strArr = new String[2];
+                    strArr[0] = str;
+                    sampleList.add(strArr);
                 }
+                
+                saveAs = HIRAGANA;
+                binding.addComment.setVisibility(View.VISIBLE);
             } else {
-                saveAs = useKana ? "hiragana" : "romaji";
                 inputstream1 = getAssets().open(currentReclist.concat(".json"));
                 sampleList = Utils.getFromJSONArray(Utils.copyFromInputStream(inputstream1, "UTF-8"));
+                
+                saveAs = useKana ? HIRAGANA : ROMAJI;
+                binding.addComment.setVisibility(View.GONE);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        binding.textview3.setText(folderName);
         sampleListAdapater = new ReclistViewAdapter(sampleList);
         binding.listview1.setAdapter(sampleListAdapater);
+        binding.textview3.setText(folderName);
         binding.bgm.setChecked(withBGM);
         updateStrings(currentRecPos);
         enableAll(true);
@@ -399,20 +425,37 @@ public class MainActivity extends Activity {
     
     public void totalRecords() {
         int total = 0;
-        ArrayList<String> fileNames = FileUtil.listFileNames(voicebankDir);
-        for (HashMap<String, String> element : sampleList) {
-            if (fileNames.contains(element.get(saveAs).concat(".wav"))) {
+        ArrayList<String> fileNames = FileUtil.getFileNames(voicebankDir);
+        for (String[] element : sampleList) {
+            if (fileNames.contains(element[saveAs].concat(".wav"))) {
                 total++;
             }
         }
         binding.textview5.setText(String.format("%d/%d", total, sampleList.size()));
     }
     
+    public void addComments(String string) {
+        List<String> reference = sampleList.stream().map(e -> e[HIRAGANA]).collect(Collectors.toList());
+        try {
+            BufferedReader reader = new BufferedReader(new StringReader(string));
+            String line = reader.readLine();
+            while (line != null) {
+                String[] parts = line.split("\\s+", 2);
+                sampleList.set(reference.indexOf(parts[0]),parts);
+                line = reader.readLine();
+            }
+        } catch (IOException exc) {
+            
+        }
+        sampleListAdapater.notifyDataSetChanged();
+        updateStrings(currentRecPos);
+    }
+    
     public class ReclistViewAdapter extends BaseAdapter {
         
-        ArrayList<HashMap<String, String>> data;
+        ArrayList<String[]> data;
         
-        public ReclistViewAdapter(ArrayList<HashMap<String, String>> arr) {
+        public ReclistViewAdapter(ArrayList<String[]> arr) {
             data = arr;
         }
         
@@ -422,7 +465,7 @@ public class MainActivity extends Activity {
         }
         
         @Override
-        public HashMap<String, String> getItem(int index) {
+        public String[] getItem(int index) {
             return data.get(index);
         }
         
@@ -443,14 +486,16 @@ public class MainActivity extends Activity {
                 listBinding = ((SampleListItemBinding) convertView.getTag(R.id.viewBinding));
             }
             
-            listBinding.textview1.setText(data.get(position).get("hiragana"));
-            if (data.get(position).containsKey("romaji")) {
-                listBinding.textview2.setText(data.get(position).get("romaji"));
-            } else {
+            listBinding.textview1.setText(data.get(position)[HIRAGANA]);
+            
+            if (data.get(position)[ROMAJI] == null) {
                 listBinding.textview2.setVisibility(View.GONE);
+            } else {
+                listBinding.textview2.setVisibility(View.VISIBLE);
+                listBinding.textview2.setText(data.get(position)[ROMAJI]);
             }
             
-            if (FileUtil.isExistFile(String.format("%s/%s.wav", voicebankDir, data.get(position).get(saveAs)))) {
+            if (FileUtil.isExistFile(String.format("%s/%s.wav", voicebankDir, data.get(position)[saveAs]))) {
                 listBinding.imageview1.setVisibility(View.VISIBLE);
             } else {
                 listBinding.imageview1.setVisibility(View.INVISIBLE);

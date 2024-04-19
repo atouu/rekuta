@@ -54,24 +54,23 @@ public class Utils {
         }
     }
 
-    public static ArrayList<HashMap<String, String>> getFromJSONArray(String string) {
-        ArrayList<HashMap<String, String>> resultList = new ArrayList<>();
+    public static ArrayList<String[]> getFromJSONArray(String string) {
+        ArrayList<String[]> resultList = new ArrayList<>();
         
         try {
         	JSONArray jsonArray = new JSONArray(string);
 
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                JSONArray objKeys = jsonObject.names();
-                HashMap<String, String> map = new HashMap<>();
+                //JSONObject jsonObject = jsonArray.getJSONObject(i);
+                JSONArray jsonStrArray = jsonArray.getJSONArray(i);
+                
+                String[] strArr = new String[2];
 
-                for (int j = 0; j < jsonObject.length(); j++) {
-                    String key = objKeys.getString(j);
-                    String value = jsonObject.opt(key).toString();
-                    map.put(key, value);
+                for (int j = 0; j < jsonStrArray.length(); j++) {
+                    strArr[j] = jsonStrArray.getString(j);
                 }
 
-                resultList.add(map);
+                resultList.add(strArr);
             }
         } catch(JSONException err) {
         	err.printStackTrace();

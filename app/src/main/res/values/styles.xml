@@ -7,7 +7,7 @@
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:colorControlHighlight">@color/colorControlHighlight</item>
-        <item name="android:colorControlNormal">@color/colorControlNormal</item>
+        <item name="android:colorControlNormal">@color/color_control_normal_light</item>
         <item name="android:textColor">@color/text_color_light</item>
     </style>
     
@@ -16,7 +16,7 @@
         <item name="android:colorPrimaryDark">@color/darkColorPrimaryDark</item>
         <item name="android:colorAccent">@color/darkColorAccent</item>
         <item name="android:colorControlHighlight">@color/darkColorControlHighlight</item>
-        <item name="android:colorControlNormal">@color/darkColorControlNormal</item>
+        <item name="android:colorControlNormal">@color/color_control_normal_dark</item>
         <item name="android:textColor">@color/text_color_dark</item>
     </style>
 </resources>
