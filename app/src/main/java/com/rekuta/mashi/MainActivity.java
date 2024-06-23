@@ -424,13 +424,13 @@ public class MainActivity extends Activity {
     }
     
     public void totalRecords() {
-        int total = 0;
         ArrayList<String> fileNames = FileUtil.getFileNames(voicebankDir);
-        for (String[] element : sampleList) {
-            if (fileNames.contains(element[saveAs].concat(".wav"))) {
-                total++;
-            }
-        }
+        
+        long total = sampleList.stream()
+            .map(element -> element[saveAs].concat(".wav"))
+            .filter(fileNames::contains)
+            .count();
+        
         binding.textview5.setText(String.format("%d/%d", total, sampleList.size()));
     }
     
