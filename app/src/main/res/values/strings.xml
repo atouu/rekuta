@@ -17,7 +17,8 @@
     <string name="about">About</string>
     <string name="okay">Okay</string>
     <string name="recording">Recording...</string>
-    <string name="custom_bgm_not_found">Custom BGM file not found or access denied, please reset it in Settings.</string>
+    <string name="custom_bgm_not_found">Error: Custom BGM file not found or access denied, please reset it in the Settings.</string>
+    <string name="file_not_found">Error: File not found.</string>
     <string name="please_wait">Please wait...</string>
     <string name="specify_custom_bgm_first">Specify your custom BGM file first.</string>
     <string name="set">Set</string>

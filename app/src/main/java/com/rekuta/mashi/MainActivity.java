@@ -238,7 +238,7 @@ public class MainActivity extends Activity {
                     InputStream inputstream1 = getContentResolver().openInputStream(data.getData());
                     addComments(Utils.copyFromInputStream(inputstream1, "Shift_JIS"));
                 } catch (FileNotFoundException e) {
-                    
+                    Utils.showMessage(getApplicationContext(), R.string.file_not_found);
                 }
                 break;
         }
@@ -346,7 +346,7 @@ public class MainActivity extends Activity {
                 binding.addComment.setVisibility(View.GONE);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Utils.showMessage(getApplicationContext(), e.getMessage());
         }
 
         sampleListAdapater = new ReclistViewAdapter(sampleList);
@@ -444,9 +444,8 @@ public class MainActivity extends Activity {
                 sampleList.set(reference.indexOf(parts[0]),parts);
                 line = reader.readLine();
             }
-        } catch (IOException exc) {
-            
-        }
+        } catch (IOException e) { }
+        
         sampleListAdapater.notifyDataSetChanged();
         updateStrings(currentRecPos);
     }
