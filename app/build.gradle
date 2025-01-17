@@ -10,11 +10,12 @@ if (keystorePropFile.exists()) {
 
 android {
     namespace "com.rekuta.mashi"
-    compileSdkVersion 29
     
     defaultConfig {
         applicationId "com.rekuta.mashi"
+        compileSdk 34
         minSdkVersion 21
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
         versionCode 6
         versionName "0.4.0"

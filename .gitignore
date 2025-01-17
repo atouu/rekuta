@@ -3,3 +3,4 @@
 app/build
 keystore.properties
 release.keystore
+local.properties
