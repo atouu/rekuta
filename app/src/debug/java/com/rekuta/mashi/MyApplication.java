@@ -17,24 +17,21 @@ public class MyApplication extends Application {
         uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
         Thread.setDefaultUncaughtExceptionHandler(
-            new Thread.UncaughtExceptionHandler() {
-                @Override
-                public void uncaughtException(Thread thread, Throwable throwable) {
+                (thread, throwable) -> {
                     Intent intent = new Intent(getApplicationContext(), DebugActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("error", Log.getStackTraceString(throwable));
 
-                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
 
                     AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
                     am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 1000, pendingIntent);
-                    
+
                     Process.killProcess(Process.myPid());
                     System.exit(1);
 
                     uncaughtExceptionHandler.uncaughtException(thread, throwable);
-                }
-            });
+                });
         super.onCreate();
     }
 }

@@ -1,5 +1,6 @@
 package com.rekuta.mashi;
 
+import android.annotation.SuppressLint;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 
@@ -21,15 +22,16 @@ public class WavRecorder {
     private static final int BYTE_RATE = RECORDER_SAMPLE_RATE * NUMBER_CHANNELS * 16 / 8;
     private static final int BufferElements2Rec = 1024;
 
-    private String filePath;
+    private final String filePath;
 
     public WavRecorder(String filePath) {
         this.filePath = filePath;
     }
 
+    @SuppressLint("MissingPermission")
     public void startRecording() {
         final String filePath = this.filePath;
-        
+
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 RECORDER_SAMPLE_RATE, RECORDER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, 512);
@@ -37,12 +39,7 @@ public class WavRecorder {
         recorder.startRecording();
         isRecording = true;
 
-        recordingThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                writeAudioDataToFile(filePath);
-            }
-        });
+        recordingThread = new Thread(() -> writeAudioDataToFile(filePath));
         
         recordingThread.start();
     }
@@ -106,12 +103,14 @@ public class WavRecorder {
         int headerSize = 44;
         byte[] header = new byte[headerSize];
 
-        header[0] = 'R'; // RIFF/WAVE header
+        // RIFF/WAVE header
+        header[0] = 'R';
         header[1] = 'I';
         header[2] = 'F';
         header[3] = 'F';
 
-        header[4] = 0; // Size of the overall file, 0 because unknown
+        // Size of the overall file, 0 because unknown
+        header[4] = 0;
         header[5] = 0;
         header[6] = 0;
         header[7] = 0;
@@ -121,36 +120,43 @@ public class WavRecorder {
         header[10] = 'V';
         header[11] = 'E';
 
-        header[12] = 'f'; // 'fmt ' chunk
+        // 'fmt ' chunk
+        header[12] = 'f';
         header[13] = 'm';
         header[14] = 't';
         header[15] = ' ';
 
-        header[16] = 16; // Length of format data
+        // Length of format data
+        header[16] = 16;
         header[17] = 0;
         header[18] = 0;
         header[19] = 0;
 
-        header[20] = 1; // Type of format (1 is PCM)
+        // Type of format (1 is PCM)
+        header[20] = 1;
         header[21] = 0;
 
         header[22] = (byte) NUMBER_CHANNELS;
         header[23] = 0;
 
-        header[24] = (byte) (RECORDER_SAMPLE_RATE & 0xff); // Sampling rate
+        // Sampling rate
+        header[24] = (byte) (RECORDER_SAMPLE_RATE & 0xff);
         header[25] = (byte) (RECORDER_SAMPLE_RATE >> 8 & 0xff);
         header[26] = (byte) (RECORDER_SAMPLE_RATE >> 16 & 0xff);
         header[27] = (byte) (RECORDER_SAMPLE_RATE >> 24 & 0xff);
 
-        header[28] = (byte) (BYTE_RATE & 0xff); // Byte rate = (Sample Rate * BitsPerSample * Channels) / 8
+        // Byte rate = (Sample Rate * BitsPerSample * Channels) / 8
+        header[28] = (byte) (BYTE_RATE & 0xff);
         header[29] = (byte) (BYTE_RATE >> 8 & 0xff);
         header[30] = (byte) (BYTE_RATE >> 16 & 0xff);
         header[31] = (byte) (BYTE_RATE >> 24 & 0xff);
 
-        header[32] = (byte) (NUMBER_CHANNELS * BITS_PER_SAMPLE / 8); //  16 Bits stereo
+        //  16 Bits stereo
+        header[32] = (byte) (NUMBER_CHANNELS * BITS_PER_SAMPLE / 8);
         header[33] = 0;
 
-        header[34] = (byte) BITS_PER_SAMPLE; // Bits per sample
+        // Bits per sample
+        header[34] = (byte) BITS_PER_SAMPLE;
         header[35] = 0;
 
         header[36] = 'd';
@@ -158,7 +164,8 @@ public class WavRecorder {
         header[38] = 't';
         header[39] = 'a';
 
-        header[40] = 0; // Size of the data section.
+        // Size of the data section.
+        header[40] = 0;
         header[41] = 0;
         header[42] = 0;
         header[43] = 0;

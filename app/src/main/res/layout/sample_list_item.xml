@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="wrap_content"
-     android:layout_width="match_parent"
-     android:gravity="center"
-     android:padding="8dp"
-     android:orientation="horizontal"
-     android:background="?@android:attr/activatedBackgroundIndicator">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="8dp">
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         android:padding="8dp"
-         android:orientation="vertical"
-         android:layout_weight="1">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="8dp"
+        tools:ignore="HardcodedText">
 
         <TextView
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:textSize="14sp"
-             android:focusable="false"
-             android:id="@+id/textview1"
-             android:text="ああいあうえあ" />
+            android:id="@+id/textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:text="ああいあうえあ"
+            android:textSize="14sp" />
 
         <TextView
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:textSize="12sp"
-             android:layout_marginTop="8dp"
-             android:focusable="false"
-             android:id="@+id/textview2"
-             android:text="a_a_i_a_u_e_a" />
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:focusable="false"
+            android:text="a_a_i_a_u_e_a"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
     <ImageView
-         android:layout_height="48dp"
-         android:layout_width="48dp"
-         android:visibility="invisible"
-         android:src="@drawable/ic_done"
-         android:scaleType="fitCenter"
-         android:padding="8dp"
-         android:focusable="false"
-         android:id="@+id/imageview1" />
+        android:id="@+id/imageview1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="@string/done"
+        android:focusable="false"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_done"
+        android:visibility="invisible" />
 
 </LinearLayout>

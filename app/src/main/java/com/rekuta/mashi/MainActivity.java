@@ -1,26 +1,39 @@
 package com.rekuta.mashi;
 
-import android.app.*;
-import android.content.*;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
-import android.media.*;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import com.rekuta.mashi.databinding.ActivityMainBinding;
 import com.rekuta.mashi.databinding.SampleListItemBinding;
-import java.io.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends Activity {
     
-    private static int HIRAGANA = 0;
-    private static int ROMAJI = 1;
+    private final int HIRAGANA = 0;
+    private final int ROMAJI = 1;
     
     private int currentRecPos = 0;
     private int recordStart = 0;
@@ -38,9 +51,8 @@ public class MainActivity extends Activity {
     private ArrayList<String[]> sampleList;
     
     private WavRecorder recorder;
-    private MediaPlayer playBGM;
     private SharedPreferences settings;
-    private BaseAdapter sampleListAdapater;
+    private BaseAdapter sampleListAdapter;
     private ActivityMainBinding binding;
     
     @Override
@@ -49,150 +61,112 @@ public class MainActivity extends Activity {
         Utils.checkThemePreference(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        initialize(savedInstanceState);
+        initialize();
         initializeLogic();
     }
     
-    private void initialize(Bundle savedInstanceState) {      
+    private void initialize() {
         settings = Utils.getDefaultSharedPreferences(this);
         
-        binding.listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                updateStrings(position);
-                currentRecPos = position;
-            }
+        binding.listview1.setOnItemClickListener((adapter, view, position, id) -> {
+            updateStrings(position);
+            currentRecPos = position;
         });
         
-        binding.set.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(binding.edittext1.getText())) {
-                    Utils.showMessage(getApplicationContext(), R.string.please_enter_vb_folder);
-                    return;
-                }
-                
-                currentReclist =  binding.spinner1.getSelectedItem().toString();
-                
-                if (currentReclist.equals("Custom")) {
-                    Intent pickFile = new Intent(Intent.ACTION_GET_CONTENT);
-                    pickFile.setType("text/plain");
-                    startActivityForResult(pickFile, 0);
-                } else {
-                    setupRecording(null);
-                }
+        binding.set.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(binding.edittext1.getText())) {
+                Utils.showMessage(getApplicationContext(), R.string.please_enter_vb_folder);
+                return;
             }
-        });
-        
-        binding.record.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                recorder = new WavRecorder(currentRecFile);
-                if (withBGM) {
-                    startRecordingWithBGM();
-                } else {
-                    binding.record.setVisibility(View.GONE);
-                    binding.stop.setVisibility(View.VISIBLE);
-                    startRecording();
-                }
-            }
-        });
-        
-        binding.stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                binding.record.setVisibility(View.VISIBLE);
-                binding.stop.setVisibility(View.GONE);
-                stopRecording();
-            }
-        });
-        
-        binding.play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!FileUtil.isExistFile(currentRecFile)) {
-                    Utils.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
-                    return;
-                }
-                
-                enableAll(false);
-                MediaPlayer playSample = MediaPlayer.create(getApplicationContext(), Uri.parse(currentRecFile));
-                playSample.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                        enableAll(true);
-                        Utils.showMessage(getApplicationContext(), R.string.done);
-                    }
-                });
-                playSample.start();
-            }
-        });
 
-        binding.bgm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                withBGM = binding.bgm.isChecked();
-            }
-        });
-        
-        binding.del.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!FileUtil.isExistFile(currentRecFile)) {
-                    Utils.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
-                    return;
-                }
-                
-                AlertDialog.Builder delSampDlg = new AlertDialog.Builder(MainActivity.this);
-                delSampDlg.setTitle(R.string.delsamp_title);
-                delSampDlg.setMessage(R.string.delsamp_content);
-                delSampDlg.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        FileUtil.deleteFile(currentRecFile);
-                        sampleListAdapater.notifyDataSetChanged();
-                        Utils.showMessage(getApplicationContext(), R.string.deleted);
-                        totalRecords();
-                    }
-                });
-                delSampDlg.setNegativeButton(R.string.no, null);
-                delSampDlg.create().show();
-            }
-        });
-        
-        binding.prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (currentRecPos == 0) {
-                    Utils.showMessage(getApplicationContext(), R.string.start);
-                } else {
-                    currentRecPos--;
-                    updateStrings(currentRecPos);
-                }
-            }
-        });
-        
-        binding.next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (currentRecPos == (sampleList.size() - 1)) {
-                    Utils.showMessage(getApplicationContext(), R.string.end);
-                } else {
-                    currentRecPos++;
-                    updateStrings(currentRecPos);
-                }
-            }
-        });
-        
-        binding.addComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utils.showMessage(getApplicationContext(), R.string.open_comment_file);
+            currentReclist =  binding.spinner1.getSelectedItem().toString();
+
+            if (currentReclist.equals("Custom")) {
                 Intent pickFile = new Intent(Intent.ACTION_GET_CONTENT);
                 pickFile.setType("text/plain");
-                startActivityForResult(pickFile, 2);
+                startActivityForResult(pickFile, 0);
+            } else {
+                setupRecording(null);
             }
+        });
+        
+        binding.record.setOnClickListener(view -> {
+            recorder = new WavRecorder(currentRecFile);
+            if (withBGM) {
+                startRecordingWithBGM();
+            } else {
+                binding.record.setVisibility(View.GONE);
+                binding.stop.setVisibility(View.VISIBLE);
+                startRecording();
+            }
+        });
+        
+        binding.stop.setOnClickListener(view -> {
+            binding.record.setVisibility(View.VISIBLE);
+            binding.stop.setVisibility(View.GONE);
+            stopRecording();
+        });
+        
+        binding.play.setOnClickListener(view -> {
+            if (!FileUtil.isExistFile(currentRecFile)) {
+                Utils.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
+                return;
+            }
+
+            enableAll(false);
+            MediaPlayer playSample = MediaPlayer.create(getApplicationContext(), Uri.parse(currentRecFile));
+            playSample.setOnCompletionListener(mp -> {
+                mp.release();
+                enableAll(true);
+                Utils.showMessage(getApplicationContext(), R.string.done);
+            });
+            playSample.start();
+        });
+
+        binding.bgm.setOnClickListener(view -> withBGM = binding.bgm.isChecked());
+        
+        binding.del.setOnClickListener(view -> {
+            if (!FileUtil.isExistFile(currentRecFile)) {
+                Utils.showMessage(getApplicationContext(), R.string.no_recorded_sample_yet);
+                return;
+            }
+
+            AlertDialog.Builder delSampDlg = new AlertDialog.Builder(MainActivity.this);
+            delSampDlg.setTitle(R.string.delsamp_title);
+            delSampDlg.setMessage(R.string.delsamp_content);
+            delSampDlg.setPositiveButton(R.string.yes, (dialog, which) -> {
+                FileUtil.deleteFile(currentRecFile);
+                sampleListAdapter.notifyDataSetChanged();
+                Utils.showMessage(getApplicationContext(), R.string.deleted);
+                totalRecords();
+            });
+            delSampDlg.setNegativeButton(R.string.no, null);
+            delSampDlg.create().show();
+        });
+        
+        binding.prev.setOnClickListener(view -> {
+            if (currentRecPos == 0) {
+                Utils.showMessage(getApplicationContext(), R.string.start);
+            } else {
+                currentRecPos--;
+                updateStrings(currentRecPos);
+            }
+        });
+        
+        binding.next.setOnClickListener(view -> {
+            if (currentRecPos == (sampleList.size() - 1)) {
+                Utils.showMessage(getApplicationContext(), R.string.end);
+            } else {
+                currentRecPos++;
+                updateStrings(currentRecPos);
+            }
+        });
+        
+        binding.addComment.setOnClickListener(view -> {
+            Utils.showMessage(getApplicationContext(), R.string.open_comment_file);
+            Intent pickFile = new Intent(Intent.ACTION_GET_CONTENT);
+            pickFile.setType("text/plain");
+            startActivityForResult(pickFile, 2);
         });
     }
     
@@ -214,7 +188,7 @@ public class MainActivity extends Activity {
         
         FileUtil.createNewFile(rekutaDir.concat("/.nomedia"));
         
-        binding.spinner1.setAdapter(new ArrayAdapter<String>(getBaseContext(), R.layout.spinner_item, reclist));
+        binding.spinner1.setAdapter(new ArrayAdapter<>(getBaseContext(), R.layout.spinner_item, reclist));
         binding.stop.setVisibility(View.GONE);
         enableAll(false);
     }
@@ -235,8 +209,8 @@ public class MainActivity extends Activity {
                 break;
             case 2:
                 try {
-                    InputStream inputstream1 = getContentResolver().openInputStream(data.getData());
-                    addComments(Utils.copyFromInputStream(inputstream1, "Shift_JIS"));
+                    InputStream inputstream = getContentResolver().openInputStream(data.getData());
+                    addComments(Utils.copyFromInputStream(inputstream, "Shift_JIS"));
                 } catch (FileNotFoundException e) {
                     Utils.showMessage(getApplicationContext(), R.string.file_not_found);
                 }
@@ -249,7 +223,7 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -273,7 +247,8 @@ public class MainActivity extends Activity {
                 Rect outRect = new Rect();
                 binding.edittext1.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE); 
+                    assert v != null;
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     binding.edittext1.clearFocus();
                 }
@@ -324,23 +299,23 @@ public class MainActivity extends Activity {
         FileUtil.makeDir(voicebankDir);
 
         try {
-            InputStream inputstream1;
+            InputStream inputstream;
             
             if (uri != null && currentReclist.equals("Custom")) {
-                inputstream1 = getContentResolver().openInputStream(uri);
-                String[] listSamps = Utils.copyFromInputStream(inputstream1, "Shift_JIS").split("\\s+");
+                inputstream = getContentResolver().openInputStream(uri);
+                String[] listSamples = Utils.copyFromInputStream(inputstream, "Shift_JIS").split("\\s+");
                 sampleList = new ArrayList<>();
-                for (String str : listSamps) {
+                for (String sample : listSamples) {
                     String[] strArr = new String[2];
-                    strArr[0] = str;
+                    strArr[0] = sample;
                     sampleList.add(strArr);
                 }
                 
                 saveAs = HIRAGANA;
                 binding.addComment.setVisibility(View.VISIBLE);
             } else {
-                inputstream1 = getAssets().open(currentReclist.concat(".json"));
-                sampleList = Utils.getFromJSONArray(Utils.copyFromInputStream(inputstream1, "UTF-8"));
+                inputstream = getAssets().open(currentReclist.concat(".json"));
+                sampleList = Utils.getFromJSONArray(Utils.copyFromInputStream(inputstream, "UTF-8"));
                 
                 saveAs = useKana ? HIRAGANA : ROMAJI;
                 binding.addComment.setVisibility(View.GONE);
@@ -349,8 +324,8 @@ public class MainActivity extends Activity {
             Utils.showMessage(getApplicationContext(), e.getMessage());
         }
 
-        sampleListAdapater = new ReclistViewAdapter(sampleList);
-        binding.listview1.setAdapter(sampleListAdapater);
+        sampleListAdapter = new ReclistViewAdapter(sampleList);
+        binding.listview1.setAdapter(sampleListAdapter);
         binding.textview3.setText(folderName);
         binding.bgm.setChecked(withBGM);
         updateStrings(currentRecPos);
@@ -366,6 +341,8 @@ public class MainActivity extends Activity {
     }
     
     public void startRecordingWithBGM() {
+        MediaPlayer playBGM;
+
         if (customBgm) {
             try {
             	playBGM = new MediaPlayer();
@@ -379,16 +356,13 @@ public class MainActivity extends Activity {
             playBGM = MediaPlayer.create(getApplicationContext(), R.raw.bgm);
         }
         
-        playBGM.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                sampleListAdapater.notifyDataSetChanged();
-                Utils.showMessage(getApplicationContext(), R.string.done);
-                binding.set.setEnabled(true);
-                enableAll(true);
-                totalRecords();
-                mp.release();
-            }
+        playBGM.setOnCompletionListener(mp -> {
+            sampleListAdapter.notifyDataSetChanged();
+            Utils.showMessage(getApplicationContext(), R.string.done);
+            binding.set.setEnabled(true);
+            enableAll(true);
+            totalRecords();
+            mp.release();
         });
         
         playBGM.start();
@@ -398,24 +372,15 @@ public class MainActivity extends Activity {
         enableAll(false);
         
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                recorder.startRecording();
-                Utils.showMessage(getApplicationContext(), R.string.recording);
-                
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        recorder.stopRecording();
-                    }
-                }, recordEnd - recordStart);
-            }
+        handler.postDelayed(() -> {
+            recorder.startRecording();
+            Utils.showMessage(getApplicationContext(), R.string.recording);
+            handler.postDelayed(() -> recorder.stopRecording(), recordEnd - recordStart);
         }, recordStart);
     }
     
     public void stopRecording() {
-        sampleListAdapater.notifyDataSetChanged();
+        sampleListAdapter.notifyDataSetChanged();
         binding.set.setEnabled(true);
         recorder.stopRecording();
         enableAll(true);
@@ -423,19 +388,28 @@ public class MainActivity extends Activity {
         Utils.showMessage(getApplicationContext(), R.string.done);
     }
     
+    @SuppressLint("DefaultLocale")
     public void totalRecords() {
         ArrayList<String> fileNames = FileUtil.getFileNames(voicebankDir);
-        
-        long total = sampleList.stream()
-            .map(element -> element[saveAs].concat(".wav"))
-            .filter(fileNames::contains)
-            .count();
+
+        long total = 0;
+        for (String[] sample : sampleList) {
+            String fileName = sample[saveAs].concat(".wav");
+            if (fileNames.contains(fileName)) {
+                total++;
+            }
+        }
         
         binding.textview5.setText(String.format("%d/%d", total, sampleList.size()));
     }
     
     public void addComments(String string) {
-        List<String> reference = sampleList.stream().map(e -> e[HIRAGANA]).collect(Collectors.toList());
+        //List<String> reference = sampleList.stream().map(e -> e[HIRAGANA]).collect(Collectors.toList());
+        List<String> reference = new ArrayList<>();
+        for (String[] element : sampleList) {
+            reference.add(element[HIRAGANA]);
+        }
+
         try {
             BufferedReader reader = new BufferedReader(new StringReader(string));
             String line = reader.readLine();
@@ -444,9 +418,9 @@ public class MainActivity extends Activity {
                 sampleList.set(reference.indexOf(parts[0]),parts);
                 line = reader.readLine();
             }
-        } catch (IOException e) { }
+        } catch (IOException ignored) { }
         
-        sampleListAdapater.notifyDataSetChanged();
+        sampleListAdapter.notifyDataSetChanged();
         updateStrings(currentRecPos);
     }
     

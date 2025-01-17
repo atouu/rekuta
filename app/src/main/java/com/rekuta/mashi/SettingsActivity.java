@@ -10,8 +10,10 @@ import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 
+@SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity {
 
     @Override
@@ -20,7 +22,7 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
     }
-
+    
     public static class SettingsFragment extends PreferenceFragment {
         private String customBgmFile;
         private boolean darkMode;
@@ -39,8 +41,9 @@ public class SettingsActivity extends PreferenceActivity {
         }
         
         private void initialize() {
-            sharedPrefs = getPreferenceManager().getDefaultSharedPreferences(getActivity());
-            customBgmFilePref = (Preference) findPreference("customBGMFile");
+            getPreferenceManager();
+            sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            customBgmFilePref = findPreference("customBGMFile");
             customBgmPref = (SwitchPreference) findPreference("customBGM");
             recordStartPref = (EditTextPreference) findPreference("recordStart");
             recordEndPref = (EditTextPreference) findPreference("recordEnd");
@@ -52,56 +55,46 @@ public class SettingsActivity extends PreferenceActivity {
                 customBgmFilePref.setSummary(Utils.getFileName(getActivity(), Uri.parse(customBgmFile)));
             }
             
-            customBgmFilePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent pickFile = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                    pickFile.setType("audio/*");
-                    startActivityForResult(pickFile, 0);
-                    return true;
-                }
+            customBgmFilePref.setOnPreferenceClickListener(preference -> {
+                Intent pickFile = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                pickFile.setType("audio/*");
+                startActivityForResult(pickFile, 0);
+                return true;
             });
             
-            customBgmPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (customBgmFile.equals("None")) {
-                        Utils.showMessage(getActivity(), R.string.specify_custom_bgm_first);
-                        return false;
-                    }
-                    return true;
+            customBgmPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                if (customBgmFile.equals("None")) {
+                    Utils.showMessage(getActivity(), R.string.specify_custom_bgm_first);
+                    return false;
                 }
+                return true;
             });
             
-            recordStartPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().isEmpty()) {
-                        recordStartPref.setText("0");
-                        return false;
-                    }
-                    return true;
+            recordStartPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                if (newValue.toString().isEmpty()) {
+                    recordStartPref.setText("0");
+                    return false;
                 }
+                return true;
             });
             
-            recordEndPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (newValue.toString().isEmpty()) {
-                        recordEndPref.setText("0");
-                        return false;
-                    }
-                    return true;
+            recordEndPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                if (newValue.toString().isEmpty()) {
+                    recordEndPref.setText("0");
+                    return false;
                 }
+                return true;
             });
             
-            darkModePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    if (darkMode == (boolean) newValue) {
-                        getActivity().setResult(Activity.RESULT_CANCELED);
-                    } else {
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra("toggleTheme", true);
-                        getActivity().setResult(Activity.RESULT_OK, returnIntent);
-                    }
-                    return true;
+            darkModePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                if (darkMode == (boolean) newValue) {
+                    getActivity().setResult(Activity.RESULT_CANCELED);
+                } else {
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("toggleTheme", true);
+                    getActivity().setResult(Activity.RESULT_OK, returnIntent);
                 }
+                return true;
             });
         }
 
@@ -115,7 +108,7 @@ public class SettingsActivity extends PreferenceActivity {
                 int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION;
                 resolver.takePersistableUriPermission(data.getData(), takeFlags);
                 
-                sharedPrefs.edit().putString("customBGMFile", data.getData().toString()).commit();
+                sharedPrefs.edit().putString("customBGMFile", data.getData().toString()).apply();
             }
         }
     }

@@ -22,7 +22,6 @@
     <string name="please_wait">Please wait...</string>
     <string name="specify_custom_bgm_first">Specify your custom BGM file first.</string>
     <string name="set">Set</string>
-    <string name="x_x">X_X</string>
     <string name="no_voicebank">No Voicebank</string>
     <string name="enter_voicebank">Enter voicebank</string>
     <string name="voicebank_is">"Voicebank: "</string>
@@ -51,4 +50,7 @@
     <string name="custom_bgm_file_title">Custom BGM File</string>
     <string name="dark_mode_title">Dark Mode</string>
     <string name="dark_mode_summary">[WIP] Set application theme to dark.</string>
+    <string name="allow">Allow</string>
+    <string name="add_oremo_comment_file">Add OREMO comment file</string>
+    <string name="none">None</string>
 </resources>

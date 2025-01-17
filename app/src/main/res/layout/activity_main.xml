@@ -1,213 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:padding="8dp"
-     android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:gravity="center_horizontal|center_vertical"
-         android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
 
         <EditText
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:hint="@string/enter_voicebank"
-             android:textSize="12sp"
-             android:singleLine="true"
-             android:layout_weight="1"
-             android:id="@+id/edittext1" />
+            android:id="@+id/edittext1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="@string/enter_voicebank"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textSize="12sp" />
 
         <Button
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:textSize="12sp"
-             android:id="@+id/set"
-             android:text="@string/set" />
+            android:id="@+id/set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:gravity="center_vertical"
-         android:orientation="horizontal"
-         android:paddingHorizontal="4dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="4dp">
 
         <TextView
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:textSize="12sp"
-             android:text="@string/voicebank_is" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/voicebank_is"
+            android:textSize="12sp" />
 
         <TextView
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:textSize="12sp"
-             android:layout_weight="1"
-             android:id="@+id/textview3"
-             android:text="None" />
+            android:id="@+id/textview3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/none"
+            android:textSize="12sp" />
 
         <Spinner
-             android:layout_height="wrap_content"
-             android:layout_width="85dp"
-             android:background="@drawable/spinner"
-             android:backgroundTint="?android:colorControlNormal"
-             android:spinnerMode="dropdown"
-             android:dropDownWidth="85dp"
-             android:foreground="?android:selectableItemBackgroundBorderless"
-             android:id="@+id/spinner1">
+            android:id="@+id/spinner1"
+            android:layout_width="85dp"
+            android:layout_height="48dp"
+            android:background="@drawable/spinner"
+            android:backgroundTint="?android:colorControlNormal"
+            android:dropDownWidth="85dp"
+            android:spinnerMode="dropdown">
 
         </Spinner>
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="match_parent"
-         android:layout_width="match_parent"
-         android:gravity="center_horizontal|center_vertical"
-         android:orientation="vertical"
-         android:layout_weight="1">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
 
         <LinearLayout
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:gravity="center_horizontal|center_vertical"
-             android:padding="8dp"
-             android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:padding="8dp">
 
             <TextView
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:layout_marginBottom="8dp"
-                 android:textSize="20sp"
-                 android:id="@+id/textview4"
-                 android:text="@string/x_x" />
+                android:id="@+id/textview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="X_X"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
 
             <TextView
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="14sp"
-                 android:id="@+id/textview2"
-                 android:text="@string/no_voicebank" />
+                android:id="@+id/textview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_voicebank"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
         <ListView
-             android:layout_height="match_parent"
-             android:layout_width="match_parent"
-             android:choiceMode="none"
-             android:isScrollContainer="false"
-             android:layout_weight="1"
-             android:id="@+id/listview1">
+            android:id="@+id/listview1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:choiceMode="none"
+            android:isScrollContainer="false">
 
         </ListView>
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <FrameLayout
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:gravity="center"
-             android:id="@+id/toolbar_top">
+            android:id="@+id/toolbar_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <TextView
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="12sp"
-                 android:layout_gravity="center"
-                 android:id="@+id/textview5" />
+                android:id="@+id/textview5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="12sp" />
 
             <ImageButton
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:scaleType="fitCenter"
-                 android:src="@drawable/ic_add_comment"
-                 android:background="?android:selectableItemBackground"
-                 android:padding="4dp"
-                 android:layout_gravity="right|center_vertical"
-                 android:id="@+id/add_comment" />
+                android:id="@+id/add_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:background="?android:selectableItemBackground"
+                android:contentDescription="@string/add_oremo_comment_file"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_add_comment" />
 
         </FrameLayout>
 
         <LinearLayout
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:orientation="horizontal">
+            tools:ignore="ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="12sp"
-                 android:layout_weight="1"
-                 android:id="@+id/record"
-                 android:text="@string/record" />
+                android:id="@+id/record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/record"
+                android:textSize="12sp" />
 
             <Button
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="12sp"
-                 android:layout_weight="1"
-                 android:id="@+id/stop"
-                 android:text="@string/stop" />
+                android:id="@+id/stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/stop"
+                android:textSize="12sp" />
 
             <Button
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="12sp"
-                 android:layout_weight="1"
-                 android:id="@+id/play"
-                 android:text="@string/play" />
+                android:id="@+id/play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/play"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
         <LinearLayout
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <ToggleButton
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textOn="@string/bgm_on"
-                 android:textSize="12sp"
-                 android:textOff="@string/bgm_off"
-                 android:layout_weight="1"
-                 android:id="@+id/bgm" />
+                android:id="@+id/bgm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textOff="@string/bgm_off"
+                android:textOn="@string/bgm_on"
+                android:textSize="12sp" />
 
             <Button
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="12sp"
-                 android:layout_weight="1"
-                 android:id="@+id/del"
-                 android:text="@string/delete" />
+                android:id="@+id/del"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/delete"
+                android:textSize="12sp" />
 
             <Button
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="12sp"
-                 android:layout_weight="1"
-                 android:id="@+id/prev"
-                 android:text="@string/previous" />
+                android:id="@+id/prev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/previous"
+                android:textSize="12sp" />
 
             <Button
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textSize="12sp"
-                 android:layout_weight="1"
-                 android:id="@+id/next"
-                 android:text="@string/next" />
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/next"
+                android:textSize="12sp" />
 
         </LinearLayout>
 

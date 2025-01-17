@@ -38,10 +38,10 @@ public class FileUtil {
         StringBuilder sb = new StringBuilder();
         FileReader fr = null;
         try {
-            fr = new FileReader(new File(path));
+            fr = new FileReader(path);
 
             char[] buff = new char[1024];
-            int length = 0;
+            int length;
 
             while ((length = fr.read(buff)) > 0) {
                 sb.append(new String(buff, 0, length));
@@ -66,7 +66,7 @@ public class FileUtil {
         FileWriter fileWriter = null;
 
         try {
-            fileWriter = new FileWriter(new File(path), false);
+            fileWriter = new FileWriter(path, false);
             fileWriter.write(str);
             fileWriter.flush();
         } catch (IOException e) {
@@ -93,7 +93,7 @@ public class FileUtil {
             fos = new FileOutputStream(destPath, false);
 
             byte[] buff = new byte[1024];
-            int length = 0;
+            int length;
 
             while ((length = fis.read(buff)) > 0) {
                 fos.write(buff, 0, length);
@@ -184,7 +184,7 @@ public class FileUtil {
         if (!dir.exists() || dir.isFile()) return fileNames;
 
         File[] listFiles = dir.listFiles();
-        if (listFiles == null || listFiles.length <= 0) return fileNames;
+        if (listFiles == null) return fileNames;
         
         for (File file : listFiles) {
             fileNames.add(file.getName());
@@ -230,7 +230,7 @@ public class FileUtil {
                 final int column_index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(column_index);
             }
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
         return null;

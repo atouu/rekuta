@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
-        android:title="@string/configuration">
-        
+    <PreferenceCategory android:title="@string/configuration">
+
         <SwitchPreference
-            android:title="@string/use_kana_title"
             android:defaultValue="false"
+            android:key="useKana"
             android:summary="@string/use_kana_summary"
-            android:key="useKana" />
+            android:title="@string/use_kana_title" />
 
         <EditTextPreference
-            android:key="recordStart"
             android:defaultValue="4200"
             android:hint="4200"
-            android:title="@string/record_start_title"
+            android:inputType="number"
+            android:key="recordStart"
             android:summary="@string/record_start_summary"
-            android:inputType="number" />
-        
-        <EditTextPreference 
-            android:key="recordEnd"
-            android:defaultValue="9600" 
+            android:title="@string/record_start_title" />
+
+        <EditTextPreference
+            android:defaultValue="9600"
             android:hint="9600"
-            android:title="@string/record_end_title"
-            android:summary="@string/record_end_summary" />
+            android:key="recordEnd"
+            android:summary="@string/record_end_summary"
+            android:title="@string/record_end_title" />
 
         <SwitchPreference
-            android:title="@string/custom_bgm_title"
             android:defaultValue="false"
+            android:key="customBGM"
             android:summary="@string/custom_bgm_summary"
-            android:key="customBGM" />
+            android:title="@string/custom_bgm_title" />
 
         <Preference
-            android:key="customBGMFile"
-            android:title="@string/custom_bgm_file_title"
             android:defaultValue="None"
-            android:summary="None" />
+            android:key="customBGMFile"
+            android:summary="None"
+            android:title="@string/custom_bgm_file_title" />
 
     </PreferenceCategory>
-    
-    <PreferenceCategory
-        android:title="@string/appearance">
-        
-        <SwitchPreference 
+
+    <PreferenceCategory android:title="@string/appearance">
+
+        <SwitchPreference
             android:key="darkMode"
-            android:title="@string/dark_mode_title"
-            android:summary="@string/dark_mode_summary"/>
-        
+            android:summary="@string/dark_mode_summary"
+            android:title="@string/dark_mode_title" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>
