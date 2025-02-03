@@ -1,4 +1,4 @@
-package com.rekuta.mashi;
+package com.rekuta.mashi.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;

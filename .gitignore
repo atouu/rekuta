@@ -1,6 +1,10 @@
 .androidide
 .gradle
+.idea
+
 app/build
+app/release
+
 keystore.properties
 release.keystore
 local.properties

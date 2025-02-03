@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="themeEntries">
+        <item>@string/theme_auto_title</item>
+        <item>@string/theme_light_title</item>
+        <item>@string/theme_dark_title</item>
+    </array>
+    <array name="themeEntryValues">
+        <item>@string/pref_theme_auto</item>
+        <item>@string/pref_theme_light</item>
+        <item>@string/pref_theme_dark</item>
+    </array>
+</resources>

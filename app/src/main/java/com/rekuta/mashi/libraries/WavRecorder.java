@@ -1,4 +1,4 @@
-package com.rekuta.mashi;
+package com.rekuta.mashi.libraries;
 
 import android.annotation.SuppressLint;
 import android.media.AudioRecord;
@@ -13,6 +13,7 @@ public class WavRecorder {
     private AudioRecord recorder;
     private boolean isRecording = false;
     private Thread recordingThread;
+    private OnAmplitudeChange amplitudeChange;
 
     private static final int RECORDER_SAMPLE_RATE = 44100;
     private static final int RECORDER_CHANNELS = android.media.AudioFormat.CHANNEL_IN_MONO;
@@ -30,8 +31,6 @@ public class WavRecorder {
 
     @SuppressLint("MissingPermission")
     public void startRecording() {
-        final String filePath = this.filePath;
-
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                 RECORDER_SAMPLE_RATE, RECORDER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, 512);
@@ -83,6 +82,12 @@ public class WavRecorder {
 
         while (isRecording) {
             recorder.read(sData, 0, BufferElements2Rec);
+
+            if (amplitudeChange != null) {
+                float amplitude = computePeak(sData);
+                if (amplitude > 0f) amplitudeChange.onAmplitudeChange(amplitude);
+            }
+
             byte[] bData = short2byte(sData);
             for (byte aBData : bData) data.add(aBData);
         }
@@ -177,12 +182,14 @@ public class WavRecorder {
         int fileSize = data.size();
         int contentSize = fileSize - 44;
 
-        data.set(4, (byte) (fileSize & 0xff)); // Size of the overall file
+        // Size of the overall file
+        data.set(4, (byte) (fileSize & 0xff));
         data.set(5, (byte) (fileSize >> 8 & 0xff));
         data.set(6, (byte) (fileSize >> 16 & 0xff));
         data.set(7, (byte) (fileSize >> 24 & 0xff));
 
-        data.set(40, (byte) (contentSize & 0xff)); // Size of the data section.
+        // Size of the data section.
+        data.set(40, (byte) (contentSize & 0xff));
         data.set(41, (byte) (contentSize >> 8 & 0xff));
         data.set(42, (byte) (contentSize >> 16 & 0xff));
         data.set(43, (byte) (contentSize >> 24 & 0xff));
@@ -194,5 +201,24 @@ public class WavRecorder {
             array[i] = list.get(i);
         }
         return array;
+    }
+
+    private float computePeak(short[] data) {
+        float max = 0;
+        for (short sample : data) {
+            float absSample = Math.abs(sample / 32768.0f);
+            if (absSample > max) {
+                max = absSample;
+            }
+        }
+        return max;
+    }
+
+    public void setOnAmplitudeChange(OnAmplitudeChange amplitudeChange) {
+        this.amplitudeChange = amplitudeChange;
+    }
+
+    public interface OnAmplitudeChange {
+        void onAmplitudeChange(float amplitude);
     }
 }

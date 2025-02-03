@@ -1,16 +1,20 @@
-package com.rekuta.mashi;
+package com.rekuta.mashi.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.rekuta.mashi.databinding.ActivitySetupBinding;
 
-public class SetupActivity extends Activity {
-          
+public class SetupActivity extends AppCompatActivity {
+
     private ActivitySetupBinding binding;
-    
+
     private final String[] perms = new String[] {
         android.Manifest.permission.READ_EXTERNAL_STORAGE,
         android.Manifest.permission.RECORD_AUDIO,
@@ -22,20 +26,15 @@ public class SetupActivity extends Activity {
         super.onCreate(savedInstanceState);
         if (hasPermissions(perms)) startMain();
 
-        getActionBar().hide();
-        setTheme(R.style.AppThemeLight);
+        getSupportActionBar().hide();
         binding = ActivitySetupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         
-        binding.button1.setOnClickListener(view -> {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(perms, 1000);
-            }
-        });
+        binding.button1.setOnClickListener(view -> ActivityCompat.requestPermissions(this, perms, 1000));
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (hasPermissions(perms)) startMain();
     }
@@ -47,11 +46,9 @@ public class SetupActivity extends Activity {
     }
 
     public boolean hasPermissions(String... permissions) {
-        if (permissions != null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String permission : permissions) {
-                if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                return false;
             }
         }
         

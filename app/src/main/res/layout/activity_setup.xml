@@ -26,7 +26,7 @@
         android:paddingTop="4dp"
         android:paddingRight="8dp"
         android:paddingBottom="8dp"
-        android:text="@string/please_grant_permission"
+        android:text="@string/please_allow_permission"
         android:textSize="14sp" />
 
     <Button

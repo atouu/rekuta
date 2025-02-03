@@ -1,8 +1,13 @@
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:name=".MyApplication">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="DiscouragedApi,LockedOrientationActivity">
+
+    <application
+        tools:replace="android:name"
+        android:name=".DebugApplication"
+        android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".DebugActivity"
+            android:name=".activities.DebugActivity"
             android:screenOrientation="portrait" />
     </application>
 </manifest>

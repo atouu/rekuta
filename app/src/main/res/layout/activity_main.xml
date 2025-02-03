@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +13,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/edittext1"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -40,17 +41,11 @@
         android:paddingHorizontal="4dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/voicebank_is"
-            android:textSize="12sp" />
-
-        <TextView
             android:id="@+id/textview3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/none"
+            android:text="@string/current_voicebank"
             android:textSize="12sp" />
 
         <Spinner
@@ -58,7 +53,7 @@
             android:layout_width="85dp"
             android:layout_height="48dp"
             android:background="@drawable/spinner"
-            android:backgroundTint="?android:colorControlNormal"
+            android:backgroundTint="?attr/colorControlNormal"
             android:dropDownWidth="85dp"
             android:spinnerMode="dropdown">
 
@@ -98,14 +93,24 @@
 
         </LinearLayout>
 
+        <com.rekuta.mashi.libraries.view.WaveformView
+            android:id="@+id/waveform"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:background="@drawable/layout_border"
+            android:visibility="gone"
+            android:layout_marginVertical="8dp"
+            app:waveColor="@color/colorControlNormal"
+            tools:visibility="visible" />
+
         <ListView
             android:id="@+id/listview1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:choiceMode="none"
-            android:isScrollContainer="false">
-
-        </ListView>
+            android:isScrollContainer="false"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
     </LinearLayout>
 
@@ -115,17 +120,18 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/toolbar_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:gravity="center"
+            android:id="@+id/toolbar_top">
 
             <TextView
                 android:id="@+id/textview5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="100/100"/>
 
             <ImageButton
                 android:id="@+id/add_comment"
@@ -136,7 +142,8 @@
                 android:contentDescription="@string/add_oremo_comment_file"
                 android:padding="4dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_add_comment" />
+                android:src="@drawable/ic_add_comment"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </FrameLayout>
 
@@ -160,7 +167,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/stop"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
             <Button
                 android:id="@+id/play"

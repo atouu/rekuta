@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/preference_widget_reset"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="?attr/colorControlHighlight"
+    android:text="@string/reset"
+    style="?attr/buttonBarButtonStyle"
+    tools:viewBindingIgnore="true" />

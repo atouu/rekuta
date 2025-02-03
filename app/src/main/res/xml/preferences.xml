@@ -1,48 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/configuration">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <PreferenceCategory
+        android:title="@string/configuration"
+        app:iconSpaceReserved="false">
 
         <SwitchPreference
             android:defaultValue="false"
-            android:key="useKana"
+            android:key="@string/pref_use_kana"
             android:summary="@string/use_kana_summary"
-            android:title="@string/use_kana_title" />
-
-        <EditTextPreference
-            android:defaultValue="4200"
-            android:hint="4200"
-            android:inputType="number"
-            android:key="recordStart"
-            android:summary="@string/record_start_summary"
-            android:title="@string/record_start_title" />
-
-        <EditTextPreference
-            android:defaultValue="9600"
-            android:hint="9600"
-            android:key="recordEnd"
-            android:summary="@string/record_end_summary"
-            android:title="@string/record_end_title" />
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="customBGM"
-            android:summary="@string/custom_bgm_summary"
-            android:title="@string/custom_bgm_title" />
-
-        <Preference
-            android:defaultValue="None"
-            android:key="customBGMFile"
-            android:summary="None"
-            android:title="@string/custom_bgm_file_title" />
+            android:title="@string/use_kana_title"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/appearance">
+    <PreferenceCategory
+        android:title="@string/background_music"
+        app:iconSpaceReserved="false">
 
-        <SwitchPreference
-            android:key="darkMode"
-            android:summary="@string/dark_mode_summary"
-            android:title="@string/dark_mode_title" />
+        <com.rekuta.mashi.preference.FilePickerPreference
+            android:defaultValue="@string/pref_background_music_default"
+            android:key="@string/pref_background_music"
+            android:title="@string/background_music_title"
+            android:widgetLayout="@layout/preference_widget_reset"
+            app:iconSpaceReserved="false"
+            app:useSimpleSummaryProvider="true"
+            tools:summary="Default" />
+
+        <com.rekuta.mashi.preference.IntegerEditTextPreference
+            android:defaultValue="4200"
+            android:dialogLayout="@layout/preference_dialog_integer_edittext"
+            android:key="@string/pref_record_start"
+            android:title="@string/record_start_title"
+            app:iconSpaceReserved="false"
+            tools:summary="1000 ms" />
+
+        <com.rekuta.mashi.preference.IntegerEditTextPreference
+            android:defaultValue="9600"
+            android:dialogLayout="@layout/preference_dialog_integer_edittext"
+            android:key="@string/pref_record_end"
+            android:title="@string/record_end_title"
+            app:iconSpaceReserved="false"
+            tools:summary="2000 ms" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/appearance"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="followSystem"
+            android:entries="@array/themeEntries"
+            android:entryValues="@array/themeEntryValues"
+            android:key="theme"
+            android:summary="@string/theme_summary"
+            android:title="@string/theme_title"
+            app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
 

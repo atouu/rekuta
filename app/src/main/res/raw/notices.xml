@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<notices>
+    <notice>
+        <name>Rekuta</name>
+        <url>https://github.com/atouu/rekuta</url>
+        <copyright>Copyright 2025 Mashi</copyright>
+        <license>GNU General Public License 3.0</license>
+    </notice>
+    <notice>
+        <name>FilePicker</name>
+        <url>https://github.com/TutorialsAndroid/FilePicker</url>
+        <copyright>Copyright 2019 FilePicker</copyright>
+        <license>Apache Software License 2.0</license>
+    </notice>
+</notices>
