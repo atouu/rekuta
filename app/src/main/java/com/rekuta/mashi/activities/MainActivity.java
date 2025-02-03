@@ -411,8 +411,14 @@ public class MainActivity extends AppCompatActivity {
         try (BufferedReader reader = new BufferedReader(new StringReader(string))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
                 String[] parts = line.split("\\s+", 2);
-                sampleList.set(reference.indexOf(parts[0]), parts);
+                if (parts.length == 2 && reference.contains(parts[0])) {
+                    sampleList.set(reference.indexOf(parts[0]), parts);
+                }
             }
         } catch (IOException ignored) { }
 
