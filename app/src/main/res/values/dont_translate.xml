@@ -6,9 +6,9 @@
     <!-- URLs -->
     <string name="project_github_url">https://github.com/atouu/rekuta</string>
     <string name="developer_name">Mashi</string>
-    <string name="developer_website_url">https://atou.win</string>
+    <string name="developer_website_url">https://mashi.wip.la</string>
     <string name="developer_github_url">https://github.com/atouu</string>
-    <string name="developer_bluesky_url">https://bsky.app/profile/atou.win</string>
+    <string name="developer_bluesky_url">https://bsky.app/profile/mashi.wip.la</string>
 
     <!-- Preference Key -->
     <string name="pref_use_kana">use_kana</string>
