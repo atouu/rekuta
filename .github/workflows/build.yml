@@ -44,7 +44,7 @@ jobs:
       if: ${{ !inputs.release-draft }}
       uses: actions/upload-artifact@v7
       with:
-        file: app/build/outputs/apk/release/app-release.apk
+        path: app/build/outputs/apk/release/app-release.apk
         archive: false
     - name: Release Draft
       if: ${{ inputs.release-draft }}
