@@ -30,9 +30,12 @@ jobs:
         distribution: 'temurin'
         cache: gradle
     - name: Get Keystore
+      env:
+        KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        KEYSTORE_PROPERTIES: ${{ secrets.KEYSTORE_PROPERTIES }}
       run: |
-        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.keystore
-        echo "${{ secrets.KEYSTORE_PROPERTIES }}" > keystore.properties
+        echo "$KEYSTORE_BASE64" | base64 -d > release.keystore
+        echo "$KEYSTORE_PROPERTIES" > keystore.properties
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
