@@ -49,7 +49,7 @@ jobs:
       if: ${{ inputs.release-draft }}
       uses: softprops/action-gh-release@v3
       with:
-        tag_name: ${{ inputs.version-name }}
+        tag_name: v${{ inputs.version-name }}${{ inputs.beta && '-beta' || '' }}
         name: ${{ inputs.version-name }}${{ inputs.beta && ' Beta' || '' }}
         prerelease: ${{ inputs.beta }}
         draft: true
