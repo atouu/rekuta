@@ -16,7 +16,6 @@ on:
         description: "Beta"
         type: boolean
         default: false
-  push:
 
 jobs:
   build:
