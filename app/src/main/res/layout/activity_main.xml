@@ -93,7 +93,7 @@
 
         </LinearLayout>
 
-        <com.rekuta.mashi.libraries.view.WaveformView
+        <com.rekuta.mashi.view.WaveformView
             android:id="@+id/waveform"
             android:layout_width="match_parent"
             android:layout_height="75dp"

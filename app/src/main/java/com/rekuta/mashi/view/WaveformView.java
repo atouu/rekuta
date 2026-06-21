@@ -1,4 +1,4 @@
-package com.rekuta.mashi.libraries.view;
+package com.rekuta.mashi.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 
 import com.rekuta.mashi.R;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,16 +49,8 @@ public class WaveformView extends View {
         }
     }
 
-    public byte[] exportDataToBytes() {
-        if (amplitudes.isEmpty()) return null;
-
-        ByteBuffer buffer = ByteBuffer.allocate(amplitudes.size() * 4);
-
-        for (float f : amplitudes) {
-            buffer.putFloat(f);
-        }
-
-        return buffer.array();
+    public List<Float> getAmplitudes() {
+        return amplitudes;
     }
 
     public void setAmplitudes(List<Float> newAmplitudes) {

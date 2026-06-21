@@ -1,4 +1,4 @@
-package com.rekuta.mashi.libraries;
+package com.rekuta.mashi.audio;
 
 import android.annotation.SuppressLint;
 import android.media.AudioRecord;
@@ -39,7 +39,7 @@ public class WavRecorder {
         isRecording = true;
 
         recordingThread = new Thread(() -> writeAudioDataToFile(filePath));
-        
+
         recordingThread.start();
     }
 
@@ -84,7 +84,7 @@ public class WavRecorder {
             recorder.read(sData, 0, BufferElements2Rec);
 
             if (amplitudeChange != null) {
-                float amplitude = computePeak(sData);
+                float amplitude = WavReader.computePeak(sData);
                 if (amplitude > 0f) amplitudeChange.onAmplitudeChange(amplitude);
             }
 
@@ -201,17 +201,6 @@ public class WavRecorder {
             array[i] = list.get(i);
         }
         return array;
-    }
-
-    private float computePeak(short[] data) {
-        float max = 0;
-        for (short sample : data) {
-            float absSample = Math.abs(sample / 32768.0f);
-            if (absSample > max) {
-                max = absSample;
-            }
-        }
-        return max;
     }
 
     public void setOnAmplitudeChange(OnAmplitudeChange amplitudeChange) {

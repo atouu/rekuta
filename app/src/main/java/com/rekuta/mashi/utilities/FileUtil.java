@@ -2,12 +2,13 @@ package com.rekuta.mashi.utilities;
 
 import android.os.Environment;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FileUtil {
 
@@ -110,29 +111,32 @@ public class FileUtil {
         return file.getAbsolutePath();
     }
 
-    public static byte[] readBytesFromFile(String path) {
-        ByteArrayOutputStream byteArrayOutputStream = null;
-
+    public static List<Float> readFloatsFromFile(String path) {
+        ArrayList<Float> floats = new ArrayList<>();
         try (FileInputStream inputStream = new FileInputStream(path)) {
-            byteArrayOutputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                byteArrayOutputStream.write(buffer, 0, bytesRead);
+            byte[] buffer = new byte[4];
+            while (inputStream.read(buffer) != -1) {
+                floats.add(ByteBuffer.wrap(buffer).getFloat());
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        assert byteArrayOutputStream != null;
-        return byteArrayOutputStream.toByteArray();
+        return floats;
     }
 
-    public static void writeBytesToFile(byte[] bytes, String path) {
+    public static void writeFloatsToFile(List<Float> floats, String path) {
+        if (floats.isEmpty()) return;
+
+        ByteBuffer buffer = ByteBuffer.allocate(floats.size() * 4);
+
+        for (float f : floats) {
+            buffer.putFloat(f);
+        }
+
         try (FileOutputStream fos = new FileOutputStream(path)) {
-            fos.write(bytes);
+            fos.write(buffer.array());
         } catch (IOException e) {
             e.printStackTrace();
         }

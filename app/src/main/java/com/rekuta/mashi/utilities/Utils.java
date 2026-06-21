@@ -26,10 +26,8 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class Utils {
     
@@ -46,21 +44,6 @@ public class Utils {
             err.printStackTrace();
         }
         return out.toString();
-    }
-
-    public static List<Float> byteArrayToFloatList(byte[] bytes) {
-        if (bytes.length % 4 != 0) {
-            throw new IllegalArgumentException("Byte array length must be a multiple of 4.");
-        }
-
-        ByteBuffer buffer = ByteBuffer.wrap(bytes); // Match the byte order used during writing
-        List<Float> floats = new ArrayList<>(); //float[ampData.length / 4];
-
-        for (int i = 0; i < (bytes.length / 4); i++) {
-            floats.add(buffer.getFloat());
-        }
-
-        return floats;
     }
 
     public static void showMessage(Context context, String s) {

@@ -38,7 +38,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         themePref = findPreference(R.string.pref_theme);
 
 
-        backgroundMusicPref.setExtensions(new String[] {"wav", "mp3"});
+        backgroundMusicPref.setExtensions("wav", "mp3");
         backgroundMusicPref.setSummaryProvider(preference -> backgroundMusicPref.getText());
         backgroundMusicPref.setOnPreferenceChangeListener((preference, newValue) -> {
             String newVal = newValue.toString();
@@ -70,7 +70,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return true;
         });
 
-        themePref.setOnPreferenceChangeListener(((preference, newValue) -> {
+        themePref.setOnPreferenceChangeListener((preference, newValue) -> {
             switch (newValue.toString()) {
                 case "dark":
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -84,7 +84,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
 
             return true;
-        }));
+        });
 
         recordStartPref.setSummaryProvider(preference -> recordStartPref.getText().concat(" ms"));
         recordEndPref.setSummaryProvider(preference -> recordEndPref.getText().concat(" ms"));

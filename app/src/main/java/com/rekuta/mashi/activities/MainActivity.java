@@ -23,8 +23,9 @@ import androidx.preference.PreferenceManager;
 
 import com.rekuta.mashi.R;
 import com.rekuta.mashi.adapter.ReclistViewAdapter;
+import com.rekuta.mashi.audio.WavReader;
+import com.rekuta.mashi.audio.WavRecorder;
 import com.rekuta.mashi.databinding.ActivityMainBinding;
-import com.rekuta.mashi.libraries.WavRecorder;
 import com.rekuta.mashi.utilities.FileUtil;
 import com.rekuta.mashi.utilities.Utils;
 
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String[]> sampleList;
 
     private WavRecorder recorder;
-    private SharedPreferences settings;
     private ReclistViewAdapter sampleListAdapter;
     private ActivityMainBinding binding;
     private MediaPlayer playBGM;
@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        settings = PreferenceManager.getDefaultSharedPreferences(this);
 
         binding.listview1.setOnItemClickListener((adapter, view, position, id) -> {
             updateStrings(position);
@@ -190,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
         useKana = settings.getBoolean(getString(R.string.pref_use_kana), false);
         backgroundMusic = settings.getString(getString(R.string.pref_background_music), "Default");
         recordStart = settings.getInt(getString(R.string.pref_record_start), 4200);
@@ -356,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
 
         Utils.showMessage(this, R.string.please_wait);
         enableAll(false);
-        
+
         Handler handler = new Handler();
         handler.postDelayed(() -> {
             recorder.startRecording();
@@ -411,12 +411,10 @@ public class MainActivity extends AppCompatActivity {
         try (BufferedReader reader = new BufferedReader(new StringReader(string))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
+                if (line.trim().isEmpty()) continue;
 
                 String[] parts = line.split("\\s+", 2);
-                if (parts.length == 2 && reference.contains(parts[0])) {
+                if (reference.contains(parts[0])) {
                     sampleList.set(reference.indexOf(parts[0]), parts);
                 }
             }
@@ -427,20 +425,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void saveAmpsToFile(String cacheFile) {
-        byte[] ampBytes = binding.waveform.exportDataToBytes();
-
-        FileUtil.writeBytesToFile(ampBytes, cacheFile);
+        FileUtil.writeFloatsToFile(binding.waveform.getAmplitudes(), cacheFile);
     }
 
     public void loadAmpsFromFile(String cacheFile) {
-        if (!FileUtil.isExistFile(cacheFile)) {
+        if (!FileUtil.isExistFile(currentRecFile)) {
             binding.waveform.resetAmplitudes();
+            return;
+        } else if (!FileUtil.isExistFile(cacheFile)) {
+            List<Float> amps;
+            try {
+                amps = WavReader.getAmpsFromWavFile(currentRecFile);
+            } catch (IOException e) {
+                Utils.showMessage(this, e.getMessage());
+                return;
+            }
+            binding.waveform.setAmplitudes(amps);
+
+            FileUtil.writeFloatsToFile(amps, cacheFile);
             return;
         }
 
-        byte[] byteData = FileUtil.readBytesFromFile(cacheFile);
-
-        binding.waveform.setAmplitudes(Utils.byteArrayToFloatList(byteData));
+        binding.waveform.setAmplitudes(FileUtil.readFloatsFromFile(cacheFile));
     }
 
 }

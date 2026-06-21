@@ -54,7 +54,7 @@ public class FilePickerPreference extends Preference {
         notifyChanged();
     }
 
-    public void setExtensions(String[] ext) {
+    public void setExtensions(String... ext) {
         extensions = ext;
     }
 
