@@ -10,14 +10,15 @@ if (keystorePropFile.exists()) {
 
 android {
     namespace "com.rekuta.mashi"
-    compileSdkVersion 29
     
     defaultConfig {
         applicationId "com.rekuta.mashi"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 6
-        versionName "0.4.0"
+        compileSdk 34
+        minSdk 21
+        //noinspection ExpiredTargetSdkVersion
+        targetSdk 28
+        versionCode project.hasProperty('versionCode') ? project.property('versionCode').toInteger() : 6
+        versionName project.hasProperty('versionName') ? project.property('versionName') : "0.4.0"
     }
     
     signingConfigs {
@@ -38,12 +39,15 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            shrinkResources true
+
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (keystorePropFile.exists()) {
                 signingConfig signingConfigs.release
             }
         }
         debug {
+            applicationIdSuffix ".debug"
             if (keystorePropFile.exists()) {
                 signingConfig signingConfigs.release
             }
@@ -52,5 +56,13 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
+
+}
+
+dependencies {
+    implementation 'io.github.tutorialsandroid:filepicker:9.2.5'
+    implementation 'de.psdev.licensesdialog:licensesdialog:2.1.0'
+    implementation "androidx.preference:preference:1.2.1"
 }

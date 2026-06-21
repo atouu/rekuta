@@ -11,9 +11,18 @@ A simple UTAU voicebank recorder app for android. "Rekuta" stands for **Rec**ord
 ## Previews
 
 <div align="center">
-  <img src="./misc/preview-1.jpg" alt="App preview" width="30%">
-  <img src="./misc/preview-2.jpg" alt="App preview" width="30%">
-  <img src="./misc/preview-3.jpg" alt="App preview" width="30%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./misc/preview-dark-1.jpg">
+    <img src="./misc/preview-light-1.jpg" alt="App preview 1" width="32%">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./misc/preview-dark-2.jpg">
+    <img src="./misc/preview-light-2.jpg" alt="App preview 2" width="32%">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./misc/preview-dark-3.jpg">
+    <img src="./misc/preview-light-3.jpg" alt="App preview 3" width="32%">
+  </picture>
 </div>
 
 ## License

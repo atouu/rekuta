@@ -1,43 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     xmlns:tools="http://schemas.android.com/tools"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:gravity="center_horizontal|center_vertical"
-     android:padding="8dp"
-     android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal|center_vertical"
+    android:orientation="vertical"
+    android:padding="8dp">
 
     <TextView
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         android:gravity="center_horizontal|center_vertical"
-         android:paddingRight="8dp"
-         android:paddingBottom="4dp"
-         android:textSize="25sp"
-         android:paddingLeft="8dp"
-         android:id="@+id/textview1"
-         android:paddingTop="8dp"
-         android:text="@string/welcome_to_rekuta" />
+        android:id="@+id/textview1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="4dp"
+        android:text="@string/welcome_to_rekuta"
+        android:textSize="25sp" />
 
     <TextView
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         android:paddingRight="8dp"
-         android:paddingBottom="8dp"
-         android:textSize="14sp"
-         android:paddingLeft="8dp"
-         android:id="@+id/textview2"
-         android:paddingTop="4dp"
-         android:text="@string/please_grant_permission" />
+        android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/please_allow_permission"
+        android:textSize="14sp" />
 
     <Button
-         android:layout_height="wrap_content"
-         android:layout_width="wrap_content"
-         android:padding="8dp"
-         android:textSize="12sp"
-         android:id="@+id/button1"
-         android:text="Sure!" />
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/allow"
+        android:textSize="12sp" />
 
 </LinearLayout>
