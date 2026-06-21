@@ -17,8 +17,8 @@ android {
         minSdk 21
         //noinspection ExpiredTargetSdkVersion
         targetSdk 28
-        versionCode 6
-        versionName "0.4.0"
+        versionCode project.hasProperty('versionCode') ? project.property('versionCode').toInteger() : 6
+        versionName project.hasProperty('versionName') ? project.property('versionName') : "0.4.0"
     }
     
     signingConfigs {
